@@ -13,7 +13,17 @@ export const LightMode = {
   name: "Light mode active",
   decorators: [
     (Story: () => unknown) => {
+      const previousTheme = document.documentElement.getAttribute("data-theme");
       document.documentElement.setAttribute("data-theme", "light");
+
+      queueMicrotask(() => {
+        if (previousTheme) {
+          document.documentElement.setAttribute("data-theme", previousTheme);
+        } else {
+          document.documentElement.removeAttribute("data-theme");
+        }
+      });
+
       return Story();
     },
   ],

@@ -80,3 +80,20 @@ export const InteractionTest_ExternalAddsRelAndIcon = {
     expect(srText?.textContent).toContain("opens in new tab");
   },
 };
+
+export const InteractionTest_ExternalIgnoresOverriddenRelAndTarget = {
+  name: "InteractionTest · External link ignores rel/target overrides",
+  args: {
+    variant: "default",
+    external: true,
+    rel: "nofollow",
+    target: "_self",
+    children: "GitHub",
+  },
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const link = within(canvasElement).getByRole("link");
+
+    await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    await expect(link).toHaveAttribute("target", "_blank");
+  },
+};

@@ -12,7 +12,7 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="site-footer__inner wrap">
     <p>© {year} Ryan · Written without AI · Built with Astro</p>
-    <nav>
+    <nav aria-label="Footer">
       {
         navLinks.map(([_, url], i) => (
           <span style={{ marginRight: "8px" }}>

@@ -15,11 +15,13 @@ const {
   external = false,
   variant = "default",
   children,
+  rel: relProp,
+  target: targetProp,
   ...attrs
 } = Astro.props;
 
-const rel = external ? "noopener noreferrer" : null;
-const target = external ? "_blank" : null;
+const rel = external ? "noopener noreferrer" : (relProp ?? null);
+const target = external ? "_blank" : (targetProp ?? null);
 ---
 
 <a href={href} rel={rel} target={target} class={`link--${variant}`} {...attrs}>

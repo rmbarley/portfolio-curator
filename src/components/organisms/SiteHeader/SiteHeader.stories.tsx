@@ -23,7 +23,7 @@ export const DesktopWritingActive = {
   args: { currentPath: "/writing" },
 };
 
-// ─── Mobile (CSS-only stacked layout at ≤480px) ───────────────────────────────
+// ─── Mobile (CSS-only stacked layout at ≤768px) ───────────────────────────────
 
 export const MobileDefault = {
   name: "Mobile · Default",
