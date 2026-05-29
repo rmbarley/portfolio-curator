@@ -20,6 +20,7 @@
     "prepare": "lefthook install"
   },
   "dependencies": {
+    "@lucide/astro": "^1.17.0",
     "astro": "^6.4.2"
   },
   "devDependencies": {

@@ -1,9 +1,6 @@
 import { expect, fn, userEvent, within } from "storybook/test";
 import Button from "./Button.astro";
 
-const ARROW_RIGHT = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
-const EXTERNAL_LINK = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
-
 export default {
   title: "Atoms/Button",
   component: Button,
@@ -55,12 +52,17 @@ export const ChipPressed = {
 
 export const WithLeadingIcon = {
   name: "With leading icon",
-  args: { variant: "ghost", iconLeading: ARROW_RIGHT, children: "See all posts" },
+  args: { variant: "ghost", iconLeading: "AppWindowMac", children: "See all posts" },
 };
 
 export const WithTrailingIcon = {
   name: "With trailing icon",
-  args: { variant: "primary", iconTrailing: EXTERNAL_LINK, children: "View project" },
+  args: {
+    variant: "primary",
+    size: "md",
+    children: "View project",
+    iconTrailing: "ArrowRight",
+  },
 };
 
 // ─── Disabled ─────────────────────────────────────────────────────────────────
@@ -93,7 +95,7 @@ export const AsLink = {
     href: "/about",
     variant: "ghost",
     children: "View on GitHub",
-    iconTrailing: EXTERNAL_LINK,
+    iconTrailing: "ExternalLink",
   },
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     const canvas = within(canvasElement);
@@ -110,9 +112,11 @@ export const AsLinkDisabled = {
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     // <a> without href has no 'link' role — query by text instead
     const el = within(canvasElement).getByText("View on GitHub");
-    expect(el.tagName.toLowerCase()).toBe("a");
-    await expect(el).toHaveAttribute("aria-disabled", "true");
-    await expect(el).toHaveAttribute("tabindex", "-1");
+    const anchor = el.closest("a");
+
+    expect(anchor?.tagName.toLowerCase()).toBe("a");
+    await expect(anchor).toHaveAttribute("aria-disabled", "true");
+    await expect(anchor).toHaveAttribute("tabindex", "-1");
   },
 };
 
