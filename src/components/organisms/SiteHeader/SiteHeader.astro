@@ -1,0 +1,74 @@
+---
+import Link from "@components/atoms/Link/Link.astro";
+import { NAV } from "../../../lib/nav";
+
+type Props = {
+  currentPath: string; // for aria-current marking
+  showThemeToggle?: boolean; // default: true
+};
+
+const { currentPath, showThemeToggle = true } = Astro.props;
+
+const navLinks = Object.entries(NAV) as [keyof typeof NAV, string][];
+---
+
+<header class="site-header">
+  <div class="site-header__inner wrap">
+    <!-- Brand -->
+    <Link href="/" variant="brand">ryan</Link>
+    <!-- Links -->
+    <nav class="nav" aria-label="Primary">
+      {
+        navLinks.map(([label, url]) => (
+          <Link
+            href={url}
+            variant="nav"
+            data-active={`${currentPath === url}`}
+          >
+            {label}
+          </Link>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding-block: var(--space-s);
+    position: sticky;
+    top: 0;
+    background: color-mix(in oklch, var(--bg) 85%, transparent);
+    backdrop-filter: saturate(180%) blur(8px);
+    z-index: 10;
+
+    & .site-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-l);
+    }
+
+    & .nav {
+      display: flex;
+      gap: var(--space-m);
+      align-items: center;
+    }
+
+    @media (width <= 480px) {
+      & .site-header__inner {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-s);
+      }
+
+      & .nav {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--space-2xs) var(--space-s);
+      }
+    }
+  }
+</style>
