@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import "../../styles/design-tokens.css";
+import "@styles/design-tokens.css";
 import { icons } from "@lucide/astro";
 
 type ButtonAttrs = HTMLAttributes<"button"> & { as?: "button" };
@@ -20,7 +20,7 @@ const {
   variant = "ghost",
   size = "md",
   as: Tag = "button",
-  pressed,
+  pressed = false,
   children,
   iconLeading,
   iconTrailing,
