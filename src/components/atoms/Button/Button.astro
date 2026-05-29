@@ -1,44 +1,41 @@
 ---
-import "../../styles/design-tokens.css";
+import type { HTMLAttributes } from "astro/types";
+import "@styles/design-tokens.css";
+import { icons } from "@lucide/astro";
 
-interface Props {
+type ButtonAttrs = HTMLAttributes<"button"> & { as?: "button" };
+type AnchorAttrs = HTMLAttributes<"a"> & { as: "a" };
+
+type Props = (ButtonAttrs | AnchorAttrs) & {
   variant?: "primary" | "ghost" | "chip";
   size?: "sm" | "md";
-  as?: "button" | "a";
-  type?: "button" | "submit" | "reset";
-  href?: string;
   pressed?: boolean;
-  disabled?: boolean;
-  /** SVG markup string. Must be developer-authored — never pass user or API content here (set:html, no sanitization). Replace with named slots when Lucide icons are wired up. */
-  iconLeading?: string;
-  /** SVG markup string. Same constraint as iconLeading. */
-  iconTrailing?: string;
   children: string;
-}
+  iconLeading?: keyof typeof icons;
+  iconTrailing?: keyof typeof icons;
+  disabled?: boolean;
+};
 
 const {
   variant = "ghost",
   size = "md",
-  as = "button",
-  type = "button",
-  href,
+  as: Tag = "button",
   pressed = false,
-  disabled = false,
+  children,
   iconLeading,
   iconTrailing,
-  children,
+  disabled = false,
+  ...attrs
 } = Astro.props;
 
-const Tag = as === "a" ? "a" : "button";
-
-let attrs: Record<string, unknown> = {};
-if (as === "a") {
-  // <a> has no native disabled — use ARIA + remove href
-  attrs = disabled ? { "aria-disabled": "true", tabindex: -1 } : { href };
-} else {
-  // <button> — defer to the browser's native disabled handling
-  attrs = disabled ? { type, disabled: true } : { type };
-}
+const LeadingIcon = iconLeading ? icons[iconLeading] : null;
+const TrailingIcon = iconTrailing ? icons[iconTrailing] : null;
+const disabledAttrs =
+  Tag === "a" && disabled
+    ? { "aria-disabled": "true", tabindex: -1 }
+    : Tag === "button" && disabled
+      ? { disabled: true }
+      : {};
 ---
 
 <Tag
@@ -49,15 +46,22 @@ if (as === "a") {
     { "btn--pressed": pressed },
   ]}
   aria-pressed={variant === "chip" ? pressed : undefined}
-  {...attrs}
+  {...disabledAttrs}
+  {...attrs as any}
 >
-  {iconLeading && <Fragment set:html={iconLeading} />}
-  {children}
-  {iconTrailing && <Fragment set:html={iconTrailing} />}
-</Tag>
+  <slot name="icon-leading">
+    {LeadingIcon && <LeadingIcon size={20} aria-hidden="true" />}
+  </slot>
 
+  <span>{children}</span>
+
+  <slot name="icon-trailing">
+    {TrailingIcon && <TrailingIcon size={20} aria-hidden="true" />}
+  </slot>
+</Tag>
 <style>
   .btn {
+    font-family: inherit;
     font-size: var(--step--1);
     padding: 0.55rem 0.95rem;
     border-radius: var(--radius-sm);

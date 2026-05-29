@@ -42,9 +42,9 @@ A filter toggle. Used in `FilterChipGroup` on the writing index. Pill-shaped, mo
 
 ## With icons
 
-Pass SVG markup (with `aria-hidden="true"` on the SVG) as `iconLeading` or `iconTrailing`. The component renders them inside the flex container with a `0.4rem` gap. 20px is the correct icon size for buttons per the iconography spec.
+Pass Lucide icon names as `iconLeading` or `iconTrailing`, or provide custom SVG through the named slots if you need something non-standard. The component renders icons inside the flex container with a `0.4rem` gap, and 20px is the correct icon size for buttons per the iconography spec.
 
-<Canvas of={ButtonStories.WithLeadingIcon} />
+ <Canvas of={ButtonStories.WithLeadingIcon} />
 <Canvas of={ButtonStories.WithTrailingIcon} />
 
 ---

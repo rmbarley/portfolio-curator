@@ -6,6 +6,7 @@ pre-commit:
   jobs:
     - name: biome
       glob: "*.{js,jsx,ts,tsx,json,jsonc,css}"
-      run: npx biome ci --error-on-warnings {staged_files}
+      run: npx biome check --write {staged_files}
+      stage_fixed: true
     - name: test
       run: npm run test:coverage

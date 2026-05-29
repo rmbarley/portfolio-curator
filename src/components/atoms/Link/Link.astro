@@ -1,0 +1,50 @@
+---
+import "@styles/design-tokens.css";
+import { ExternalLink } from "@lucide/astro";
+
+interface Props {
+  href: string;
+  external?: boolean;
+  variant?: "default" | "mono" | "subtle";
+  children: string;
+}
+
+const { href, external = false, variant = "default", children } = Astro.props;
+
+const rel = external ? "noopener noreferrer" : null;
+const target = external ? "_blank" : null;
+---
+
+<a href={href} rel={rel} target={target} class={`link--${variant}`}>
+  {children}
+  {
+    external && (
+      <>
+        <ExternalLink size={14} aria-hidden="true" />
+        <span class="sr-only">(opens in new tab)</span>
+      </>
+    )
+  }
+</a>
+
+<style>
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .link--default {
+    color: inherit;
+  }
+
+  .link--mono {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    font-family: var(--font-mono);
+  }
+
+  .link--subtle {
+    color: var(--text-muted);
+  }
+</style>
