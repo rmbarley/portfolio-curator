@@ -12,7 +12,10 @@ const preview = {
       // Fail CI on serious and critical Axe violations; warn on moderate/minor
       config: {},
       options: {
-        runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'] },
+        runOnly: {
+          type: "tag",
+          values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"],
+        },
       },
       manual: false,
     },

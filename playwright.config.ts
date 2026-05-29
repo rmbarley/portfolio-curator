@@ -1,4 +1,4 @@
-import { defineConfig, devices } from "@playwright/test";
+import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   // Scope to tests/ — keeps Playwright away from the Vitest *.test.ts story tests in src/.

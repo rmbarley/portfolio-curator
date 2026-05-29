@@ -1,26 +1,26 @@
-import { afterEach, describe, expect, test } from 'vitest';
-import axe from 'axe-core';
-import { composeStories, renderStory } from '@storybook-astro/framework/testing';
-import * as stories from './Button.stories';
+import { composeStories, renderStory } from "@storybook-astro/framework/testing";
+import axe from "axe-core";
+import { afterEach, describe, expect, test } from "vitest";
+import * as stories from "./Button.stories";
 
 // composeStories applies args/decorators and exposes each story's play function.
-const composed = composeStories(stories) as Record<string, any>;
+const composed = composeStories(stories);
 
 // Mirrors the rule set configured for addon-a11y in .storybook/preview.js.
-const A11Y_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'];
+const A11Y_TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"];
 
 afterEach(() => {
   // renderStory writes into document.body; clear it so stories don't bleed together.
-  document.body.innerHTML = '';
+  document.body.innerHTML = "";
 });
 
-describe('Button', () => {
+describe("Button", () => {
   for (const [name, Story] of Object.entries(composed)) {
     test(name, async () => {
       await renderStory(Story);
-      expect(document.body.querySelector('.btn')).toBeTruthy();
+      expect(document.body.querySelector(".btn")).toBeTruthy();
 
-      if (typeof Story.play === 'function') {
+      if (typeof Story.play === "function") {
         await Story.play({ canvasElement: document.body });
       }
 
