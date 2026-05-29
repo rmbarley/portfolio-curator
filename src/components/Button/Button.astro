@@ -17,7 +17,7 @@ type Props = (ButtonAttrs | AnchorAttrs) & {
 };
 
 const {
-  variant = "primary",
+  variant = "ghost",
   size = "md",
   as: Tag = "button",
   pressed,
@@ -50,13 +50,13 @@ const disabledAttrs =
   {...attrs as any}
 >
   <slot name="icon-leading">
-    {LeadingIcon && <LeadingIcon size={16} aria-hidden="true" />}
+    {LeadingIcon && <LeadingIcon size={20} aria-hidden="true" />}
   </slot>
 
   <span>{children}</span>
 
   <slot name="icon-trailing">
-    {TrailingIcon && <TrailingIcon size={16} aria-hidden="true" />}
+    {TrailingIcon && <TrailingIcon size={20} aria-hidden="true" />}
   </slot>
 </Tag>
 <style>

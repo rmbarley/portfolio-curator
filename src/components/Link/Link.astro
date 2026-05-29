@@ -12,14 +12,15 @@ interface Props {
 const { href, external = false, variant = "default", children } = Astro.props;
 
 const rel = external ? "noopener noreferrer" : null;
+const target = external ? "_blank" : null;
 ---
 
-<a href={href} rel={rel} class={`link--${variant}`}>
+<a href={href} rel={rel} target={target} class={`link--${variant}`}>
   {children}
   {
     external && (
       <>
-        <ExternalLink size={14} aria-hidden />
+        <ExternalLink size={14} aria-hidden="true" />
         <span class="sr-only">(opens in new tab)</span>
       </>
     )
@@ -34,7 +35,7 @@ const rel = external ? "noopener noreferrer" : null;
   }
 
   .link--default {
-    color: "inherit";
+    color: inherit;
   }
 
   .link--mono {

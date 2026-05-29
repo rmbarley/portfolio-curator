@@ -114,9 +114,11 @@ export const AsLinkDisabled = {
     const el = within(canvasElement).getByText("View on GitHub");
     const anchor = el.closest("a");
 
+    expect(anchor).toBeTruthy();
     expect(anchor?.tagName.toLowerCase()).toBe("a");
     await expect(anchor).toHaveAttribute("aria-disabled", "true");
     await expect(anchor).toHaveAttribute("tabindex", "-1");
+    await expect(anchor).not.toHaveAttribute("href");
   },
 };
 
