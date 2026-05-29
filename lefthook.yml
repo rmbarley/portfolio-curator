@@ -1,0 +1,11 @@
+# Runs the full check suite before every commit so nothing broken gets pushed.
+# Biome only sees the staged files it cares about; the test suite always runs
+# (a config change can break tests without touching a test file).
+pre-commit:
+  parallel: true
+  jobs:
+    - name: biome
+      glob: "*.{js,jsx,ts,tsx,json,jsonc,css}"
+      run: npx biome ci --error-on-warnings {staged_files}
+    - name: test
+      run: npm run test:coverage

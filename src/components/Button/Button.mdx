@@ -1,0 +1,82 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+The only button atom. Every call-to-action, form submit, and filter toggle in the system routes through `variant`. When you need an element that looks like a button but navigates, use `as='a'` — the rendered HTML will be `<a>`, not `<button>`.
+
+---
+
+## Variants
+
+### Ghost
+
+The default. Use for secondary actions — "See all posts", "View on GitHub", nav-adjacent CTAs where you want a visible control but don't want to compete with a primary action. On hover the text turns violet; that's the only visual affordance beyond the border.
+
+<Canvas of={ButtonStories.Ghost} />
+
+### Primary
+
+One per view. Reserved for the single most important action — the hero CTA, the Ask submit. Using more than one primary on the same screen competes with itself; reach for ghost for the secondary action.
+
+<Canvas of={ButtonStories.Primary} />
+
+### Chip
+
+A filter toggle. Used in `FilterChipGroup` on the writing index. Pill-shaped, monospace, muted by default. Pressed state is surface-fill + full-text color — not the accent, just elevated contrast. The `pressed` prop maps directly to `aria-pressed`.
+
+<Canvas of={ButtonStories.ChipUnpressed} />
+<Canvas of={ButtonStories.ChipPressed} />
+
+---
+
+## Sizes
+
+`md` is the default and matches the mockup's base button. Use `sm` for tight layouts — chip counts, inline toolbars, footer actions.
+
+<Canvas of={ButtonStories.PrimarySmall} />
+
+---
+
+## With icons
+
+Pass SVG markup (with `aria-hidden="true"` on the SVG) as `iconLeading` or `iconTrailing`. The component renders them inside the flex container with a `0.4rem` gap. 20px is the correct icon size for buttons per the iconography spec.
+
+<Canvas of={ButtonStories.WithLeadingIcon} />
+<Canvas of={ButtonStories.WithTrailingIcon} />
+
+---
+
+## As anchor
+
+When the action navigates, pass `as='a'` and `href`. This renders a semantic `<a>` — correct for screen readers and right-click behavior. The visual appearance is identical to the `<button>` variant. Do not use `<button onclick="navigate()">` when a link is the right element.
+
+<Canvas of={ButtonStories.AsLink} />
+
+---
+
+## Disabled
+
+The disabled state uses `aria-disabled="true"` and `tabindex="-1"` rather than the native `disabled` attribute. This keeps the element in the DOM for screen readers while removing it from the tab sequence. `pointer-events: none` prevents mouse interaction.
+
+Note: an `<a>` with `disabled` strips its `href` — without `href`, the anchor loses its link role, which is correct (a disabled link shouldn't be navigable).
+
+<Canvas of={ButtonStories.DisabledPrimary} />
+<Canvas of={ButtonStories.AsLinkDisabled} />
+
+---
+
+## Don'ts
+
+- **Two primary buttons side by side.** One primary, one ghost. The system has one accent.
+- **Chip as a navigation link.** Chips are toggles. Use `ghost` with `as='a'` for nav.
+- **Wrapping text inside a button.** Buttons should be short labels. If your copy is long, it's probably not a button.
+- **`<button onclick="location.href=...">` for navigation.** Use `as='a'` + `href`.
+
+---
+
+## Props
+
+<ArgTypes of={ButtonStories} />
