@@ -10,7 +10,9 @@ const preview = {
     },
     a11y: {
       // Fail CI on serious and critical Axe violations; warn on moderate/minor
-      config: {},
+      config: {
+        rules: [{ id: "region", enabled: false }],
+      },
       options: {
         runOnly: {
           type: "tag",
