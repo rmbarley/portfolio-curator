@@ -16,7 +16,8 @@
     "test:coverage": "vitest run --project storybook --coverage",
     "format": "biome format --write",
     "lint": "biome check --write",
-    "check": "biome ci --error-on-warnings"
+    "check": "biome ci --error-on-warnings",
+    "prepare": "lefthook install"
   },
   "dependencies": {
     "astro": "^6.4.2"
@@ -31,6 +32,7 @@
     "@types/node": "^25.9.1",
     "@vitest/coverage-v8": "^4.1.7",
     "happy-dom": "^20.9.0",
+    "lefthook": "2.1.9",
     "storybook": "^10.4.1",
     "vitest": "^4.1.7"
   }
