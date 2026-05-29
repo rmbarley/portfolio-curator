@@ -1,21 +1,28 @@
 ---
+import type { HTMLAttributes } from "astro/types";
 import "@styles/design-tokens.css";
 import { ExternalLink } from "@lucide/astro";
 
-interface Props {
+interface Props extends HTMLAttributes<"a"> {
   href: string;
   external?: boolean;
   variant?: "default" | "mono" | "subtle" | "brand" | "nav";
   children?: string;
 }
 
-const { href, external = false, variant = "default", children } = Astro.props;
+const {
+  href,
+  external = false,
+  variant = "default",
+  children,
+  ...attrs
+} = Astro.props;
 
 const rel = external ? "noopener noreferrer" : null;
 const target = external ? "_blank" : null;
 ---
 
-<a href={href} rel={rel} target={target} class={`link--${variant}`}>
+<a href={href} rel={rel} target={target} class={`link--${variant}`} {...attrs}>
   <slot>{children}</slot>
   {
     external && (
@@ -73,9 +80,26 @@ const target = external ? "_blank" : null;
     text-decoration: none;
     color: var(--text-muted);
     font-size: var(--step--1);
+    position: relative;
 
     &:hover {
       color: var(--text);
+    }
+
+    &[data-active="true"] {
+      color: var(--text);
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: -0.8rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 4px;
+        background: var(--accent);
+        border-radius: 50%;
+      }
     }
   }
 </style>
