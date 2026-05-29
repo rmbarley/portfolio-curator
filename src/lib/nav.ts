@@ -10,6 +10,12 @@ export const NAV = {
   Contact: "/contact",
 } as const;
 
+export const BOTTOM_NAV = {
+  Now: "/now",
+  Colophon: "/colophon",
+  Feed: "/feed.xml",
+} as const;
+
 export const INTERNAL = {
   colophon: "/colophon", // "How I work" link in hero + footer
   syllabus: "/building#syllabus",
