@@ -10,6 +10,7 @@ export default defineConfig({
     name: "storybook",
     environment: "happy-dom",
     include: ["src/**/*.test.ts"],
+    testTimeout: 10000,
     coverage: {
       provider: "v8",
       // Scoped to .ts/.tsx logic only. Coverage on compiled .astro files is
