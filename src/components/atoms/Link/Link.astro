@@ -5,8 +5,8 @@ import { ExternalLink } from "@lucide/astro";
 interface Props {
   href: string;
   external?: boolean;
-  variant?: "default" | "mono" | "subtle";
-  children: string;
+  variant?: "default" | "mono" | "subtle" | "brand" | "nav";
+  children?: string;
 }
 
 const { href, external = false, variant = "default", children } = Astro.props;
@@ -16,7 +16,7 @@ const target = external ? "_blank" : null;
 ---
 
 <a href={href} rel={rel} target={target} class={`link--${variant}`}>
-  {children}
+  <slot>{children}</slot>
   {
     external && (
       <>
@@ -46,5 +46,36 @@ const target = external ? "_blank" : null;
 
   .link--subtle {
     color: var(--text-muted);
+  }
+
+  .link--brand {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    font-variation-settings:
+      "opsz" 36,
+      "SOFT" 60;
+
+    &::after {
+      content: ".";
+      color: var(--accent);
+      margin-left: -0.05em;
+    }
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+
+  .link--nav {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: var(--step--1);
+
+    &:hover {
+      color: var(--text);
+    }
   }
 </style>

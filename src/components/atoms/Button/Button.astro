@@ -77,56 +77,53 @@ const disabledAttrs =
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-  }
 
-  .btn:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
+    &:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
 
-  .btn:disabled,
-  .btn[aria-disabled="true"] {
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
+    &:is(:disabled, [aria-disabled="true"]) {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
 
-  .btn--ghost:hover:not(:disabled):not([aria-disabled="true"]) {
-    background: var(--surface);
-    color: var(--accent);
-  }
+    &.btn--ghost:hover:not(:disabled, [aria-disabled="true"]) {
+      background: var(--surface);
+      color: var(--accent);
+    }
 
-  .btn--primary {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-  }
+    &.btn--primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
 
-  .btn--primary:hover:not(:disabled):not([aria-disabled="true"]) {
-    background: var(--accent-hover);
-    border-color: var(--accent-hover);
-    color: var(--bg);
-  }
+      &:hover:not(:disabled, [aria-disabled="true"]) {
+        background: var(--accent-hover);
+        border-color: var(--accent-hover);
+      }
+    }
 
-  .btn--chip {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    padding: 0.3rem 0.65rem;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--text-muted);
-    background: transparent;
-  }
+    &.btn--chip {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 0.3rem 0.65rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
 
-  .btn--chip[aria-pressed="true"] {
-    color: var(--text);
-    border-color: var(--border-strong);
-    background: var(--surface);
-  }
+      &[aria-pressed="true"] {
+        color: var(--text);
+        border-color: var(--border-strong);
+        background: var(--surface);
+      }
+    }
 
-  .btn--sm {
-    padding: 0.3rem 0.65rem;
-    font-size: 0.75rem;
+    &.btn--sm {
+      padding: 0.3rem 0.65rem;
+      font-size: 0.75rem;
+    }
   }
 </style>
