@@ -1,0 +1,69 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as HeadingStories from './Heading.stories';
+
+<Meta of={HeadingStories} />
+
+# Heading
+
+Semantic heading with the Fraunces display treatment. The key design decision: `level` and `visualSize` are independent. The HTML element is always driven by `level` — you cannot render an `<h3>` that looks like an `<h3>` but is actually a `<div>`. Visual size is a separate concern, controlled by `visualSize` when you need to break from the defaults.
+
+---
+
+## Semantic levels
+
+Each level has a default visual size that matches the type scale in `design-tokens.css`. These defaults are correct for most uses — only override them when the document structure and the visual hierarchy genuinely diverge.
+
+<Canvas of={HeadingStories.H1_DefaultSize} />
+<Canvas of={HeadingStories.H2_Default} />
+<Canvas of={HeadingStories.H3_Default} />
+<Canvas of={HeadingStories.H4_Default} />
+
+---
+
+## Visual size override
+
+Use `visualSize` when the semantic level and the visual weight need to differ. The classic case: a section heading that is semantically an `<h2>` but sits inside a narrow sidebar where step-4 would be too loud. The HTML element is still `<h2>` — screen readers and document outlines are unaffected.
+
+<Canvas of={HeadingStories.H1_SmallerVisual} />
+
+The `visualSize` values map directly to the fluid type scale tokens: `'6'` → `--step-6`, `'5'` → `--step-5`, and so on down to `'1'` → `--step-1`.
+
+---
+
+## Softness axis
+
+Fraunces is a variable font with a `SOFT` optical axis (0–100) that controls how rounded and loose the letterforms feel. Three values are exposed:
+
+- **`softness=30`** — tight, high-contrast strokes. Use for hero headings and anywhere you want Fraunces to feel confident rather than warm.
+- **`softness=60`** — the default. A balanced middle ground, right for most section headings.
+- **`softness=100`** — open, loose, slightly whimsical. Reserve for blockquote callouts or wherever the editorial tone is warmer.
+
+<Canvas of={HeadingStories.Soft30} />
+<Canvas of={HeadingStories.Soft60} />
+<Canvas of={HeadingStories.Soft100} />
+
+The `opsz` (optical size) axis is derived automatically from `visualSize` and is not exposed as a prop. It cannot be set independently — `font-variation-settings` requires both axes in a single declaration.
+
+---
+
+## Text wrapping
+
+`balance` controls `text-wrap: balance`, which distributes text across lines to avoid a single orphaned word on the last line. It defaults to `true` for `h1` and `h2` (where long, display-size headings benefit most) and `false` for `h3` and `h4`.
+
+<Canvas of={HeadingStories.WithBalance} />
+<Canvas of={HeadingStories.WithoutBalance} />
+
+---
+
+## Don'ts
+
+- **Don't skip heading levels.** An `<h4>` that follows an `<h2>` breaks document outline semantics for screen readers. Use `visualSize` if the visual size needs to change — not a different `level`.
+- **Don't demote the semantic level just for a smaller visual size.** If you need an h2 that looks smaller, use `visualSize`. Don't reach for `level={3}` to get a smaller appearance when the content is semantically still at the h2 level.
+- **Don't use `softness=100` for primary headings.** It reads as decorative at large sizes. Keep it for secondary or editorial contexts.
+- **Don't place more than one `<h1>` on a page.** The Heading component enforces no constraint here — it's a document-level rule.
+
+---
+
+## Props
+
+<ArgTypes of={HeadingStories} />

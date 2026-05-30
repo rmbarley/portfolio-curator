@@ -1,0 +1,63 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as LinkStories from './Link.stories';
+
+<Meta of={LinkStories} />
+
+# Link
+
+Styled anchor with explicit control over appearance. Most prose links don't need this component — the base `<a>` styles in `design-tokens.css` handle them automatically. Reach for `Link` when you need a named variant: an external indicator, monospace treatment, a footer-style subtle link, or the brand mark or nav items.
+
+---
+
+## Default
+
+Inherits the surrounding text color. The underline is faint (`--link-decoration`) at rest and snaps to `--accent` on hover. This is the variant to use inside body copy, post footers, and citation lists.
+
+<Canvas of={LinkStories.Default} />
+<Canvas of={LinkStories.Hover} />
+<Canvas of={LinkStories.Focus} />
+
+---
+
+## External
+
+Pass `external={true}` when the link leaves the site. This does three things automatically: adds `rel="noopener noreferrer"`, opens in `_blank`, renders a trailing icon (14px, decorative), and appends a visually-hidden "(opens in new tab)" span for screen readers. You cannot override `rel` or `target` on an external link — they are fixed.
+
+<Canvas of={LinkStories.External} />
+
+---
+
+## Variants
+
+### Mono
+
+Monospace, muted, slightly smaller. Use for file paths, package names, or any link whose text is a technical identifier rather than prose. The muted color keeps it from competing with nearby body copy.
+
+<Canvas of={LinkStories.Mono} />
+
+### Subtle
+
+Muted color, normal typeface. Use for low-hierarchy navigation — footer links, "back to top" utilities, supporting links inside a card. The underline treatment is inherited from the base styles.
+
+<Canvas of={LinkStories.Subtle} />
+
+### Nav
+
+Header navigation items. No underline, muted at rest, full text color on hover. The active state adds a 4px violet dot to the left via `::before` — triggered by setting `data-active="true"` on the element. SiteHeader sets this from the `currentPath` prop.
+
+<Canvas of={LinkStories.Nav} />
+<Canvas of={LinkStories.NavActive} />
+
+---
+
+## Don'ts
+
+- **Don't use `variant='nav'` in body copy.** Nav items have no underline, which fails WCAG for inline links.
+- **Don't fake an external link without `external={true}`.** Setting `target="_blank"` directly skips the SR announcement and `rel` safety attributes.
+- **Don't pass `rel` or `target` to an external link.** They're ignored — the component enforces `noopener noreferrer` and `_blank` unconditionally.
+
+---
+
+## Props
+
+<ArgTypes of={LinkStories} />
