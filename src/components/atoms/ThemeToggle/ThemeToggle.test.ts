@@ -22,33 +22,23 @@ afterEach(() => {
 describe("ThemeToggle", () => {
   for (const [name, Story] of Object.entries(composed)) {
     test(name, async () => {
-      localStorage.setItem("theme", name === "LightMode" ? "light" : "dark");
+      const initial = name === "LightMode" ? "light" : "dark";
+      const toggled = initial === "light" ? "dark" : "light";
 
+      localStorage.setItem("theme", initial);
       await renderStory(Story);
       initThemeToggle();
 
       const button = within(document.body).getByRole("button");
       expect(button).toBeTruthy();
-      expect(button).toHaveAttribute(
-        "aria-label",
-        name === "LightMode" ? "Switch to dark theme" : "Switch to light theme",
-      );
-      expect(document.documentElement).toHaveAttribute(
-        "data-theme",
-        name === "LightMode" ? "light" : "dark",
-      );
+      expect(button).toHaveAttribute("aria-label", `Switch to ${toggled} theme`);
+      expect(document.documentElement).toHaveAttribute("data-theme", initial);
 
       await userEvent.click(button);
 
-      expect(document.documentElement).toHaveAttribute(
-        "data-theme",
-        name === "LightMode" ? "dark" : "light",
-      );
-      expect(localStorage.getItem("theme")).toBe(name === "LightMode" ? "dark" : "light");
-      expect(button).toHaveAttribute(
-        "aria-label",
-        name === "LightMode" ? "Switch to light theme" : "Switch to dark theme",
-      );
+      expect(document.documentElement).toHaveAttribute("data-theme", toggled);
+      expect(localStorage.getItem("theme")).toBe(toggled);
+      expect(button).toHaveAttribute("aria-label", `Switch to ${initial} theme`);
 
       const results = await axe.run(document.body, {
         runOnly: A11Y_TAGS,
