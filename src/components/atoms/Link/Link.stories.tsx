@@ -47,10 +47,6 @@ export const Subtle = {
   args: { variant: "subtle" },
 };
 
-export const Brand = {
-  args: { href: "/", variant: "brand", children: "ryan" },
-};
-
 export const Nav = {
   args: { variant: "nav", children: "Writing" },
 };

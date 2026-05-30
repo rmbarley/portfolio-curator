@@ -16,7 +16,7 @@ const navLinks = Object.entries(NAV) as [keyof typeof NAV, string][];
 <header class="site-header">
   <div class="site-header__inner wrap">
     <div class="brand-slot">
-      <Link href="/" variant="brand">ryan</Link>
+      <a href="/" class="brand-link">ryan</a>
     </div>
     <nav class="nav" aria-label="Primary">
       {
@@ -63,6 +63,25 @@ const navLinks = Object.entries(NAV) as [keyof typeof NAV, string][];
       gap: var(--space-l);
       align-items: center;
       margin-left: auto;
+    }
+
+    & .brand-link {
+      font-family: var(--font-display);
+      font-size: var(--step-1);
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+      font-variation-settings: "opsz" 36, "SOFT" 60;
+
+      &::after {
+        content: ".";
+        color: var(--accent);
+        margin-left: -0.05em;
+      }
+
+      &:hover {
+        color: var(--accent);
+      }
     }
 
     & .toggle-slot {
