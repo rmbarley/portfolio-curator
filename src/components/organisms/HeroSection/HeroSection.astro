@@ -17,17 +17,14 @@ type Props = {
 
 const { primaryCta, secondaryCta, lede, intro, aside } = Astro.props;
 
-const hasLede = Astro.slots.has("lede") || Boolean(lede);
 const showAside = Astro.slots.has("aside") || Boolean(aside);
 ---
 
 <section class="hero">
   <div class="hero__main">
-    {hasLede && (
-      <Heading level={1} visualSize="6" softness={30}>
-        <slot name="lede">{lede && <Fragment set:html={lede} />}</slot>
-      </Heading>
-    )}
+    <Heading level={1} visualSize="6" softness={30}>
+      <slot name="lede">{lede && <Fragment set:html={lede} />}</slot>
+    </Heading>
     <p class="hero__meta">
       <slot name="intro">{intro && <Fragment set:html={intro} />}</slot>
     </p>
