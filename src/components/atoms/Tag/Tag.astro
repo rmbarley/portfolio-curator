@@ -1,0 +1,26 @@
+---
+type Props = {
+  variant?: "default" | "outlined";
+  children?: string;
+};
+
+const { variant = "default", children } = Astro.props;
+---
+
+<span class:list={["tag", variant === "outlined" && "tag--outlined"]}>
+  <slot>{children}</slot>
+</span>
+
+<style>
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-subtle);
+  }
+
+  .tag--outlined {
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.45rem;
+    border-radius: var(--radius-sm);
+  }
+</style>
