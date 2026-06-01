@@ -40,7 +40,7 @@ const {
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <SiteHeader currentPath={currentPath} showThemeToggle={showThemeToggle} />
-    <main id="main">
+    <main id="main" class="wrap">
       <slot />
     </main>
     <SiteFooter />
@@ -48,6 +48,11 @@ const {
 </html>
 
 <style>
+  main {
+    padding-block: var(--space-2xl);
+    max-width: 44rem;
+    margin: 0 auto;
+  }
   .skip-link {
     position: absolute;
     top: 0.5rem;
