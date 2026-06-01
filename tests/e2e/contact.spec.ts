@@ -7,14 +7,12 @@ test.describe("Contact page", () => {
 
   // AC-CONTACT-01 — All contact channels use semantic definition list.
   test("AC-CONTACT-01 · channels use <dl> with <dt>/<dd>", async ({ page }) => {
-    const rows = page.locator("main dl");
-    const count = await rows.count();
-    expect(count).toBeGreaterThan(0);
+    await expect(page.locator("main dl").first()).toBeVisible();
 
-    for (let i = 0; i < count; i++) {
-      await expect(rows.nth(i).locator("dt")).toHaveCount(1);
-      await expect(rows.nth(i).locator("dd")).toHaveCount(1);
-    }
+    const dtCount = await page.locator("main dt").count();
+    const ddCount = await page.locator("main dd").count();
+    expect(dtCount).toBeGreaterThan(0);
+    expect(ddCount).toBe(dtCount);
   });
 
   // AC-CONTACT-02 — Email link uses mailto: protocol.
