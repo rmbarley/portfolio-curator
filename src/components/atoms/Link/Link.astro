@@ -7,7 +7,7 @@ interface Props extends HTMLAttributes<"a"> {
   href: string;
   external?: boolean;
   variant?: "default" | "mono" | "subtle" | "nav";
-  iconTrailing?: string;
+  iconTrailing?: keyof typeof icons;
   children?: string;
 }
 
@@ -25,9 +25,7 @@ const {
 
 const rel = external ? "noopener noreferrer" : (relProp ?? null);
 const target = external ? "_blank" : (targetProp ?? null);
-const TrailingIcon = iconTrailing
-  ? icons[iconTrailing as keyof typeof icons]
-  : null;
+const TrailingIcon = iconTrailing ? icons[iconTrailing] : null;
 ---
 
 <a

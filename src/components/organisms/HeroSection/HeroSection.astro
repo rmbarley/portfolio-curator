@@ -7,6 +7,9 @@ type Cta = { label: string; href: string };
 type Props = {
   primaryCta: Cta;
   secondaryCta?: Cta;
+  // These props accept dev-authored HTML strings so Storybook args work in the
+  // test environment (which drops slots). They are NOT for user/CMS input —
+  // always prefer the matching named slot for untrusted or rich content.
   lede?: string;
   intro?: string;
   aside?: string;
@@ -14,14 +17,17 @@ type Props = {
 
 const { primaryCta, secondaryCta, lede, intro, aside } = Astro.props;
 
+const hasLede = Astro.slots.has("lede") || Boolean(lede);
 const showAside = Astro.slots.has("aside") || Boolean(aside);
 ---
 
 <section class="hero">
   <div class="hero__main">
-    <Heading level={1} visualSize="6" softness={30}>
-      <slot name="lede">{lede && <Fragment set:html={lede} />}</slot>
-    </Heading>
+    {hasLede && (
+      <Heading level={1} visualSize="6" softness={30}>
+        <slot name="lede">{lede && <Fragment set:html={lede} />}</slot>
+      </Heading>
+    )}
     <p class="hero__meta">
       <slot name="intro">{intro && <Fragment set:html={intro} />}</slot>
     </p>
