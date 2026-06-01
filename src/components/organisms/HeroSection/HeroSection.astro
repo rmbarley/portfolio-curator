@@ -1,0 +1,119 @@
+---
+import Heading from "@components/atoms/Heading/Heading.astro";
+import Button from "@components/atoms/Button/Button.astro";
+
+type Cta = { label: string; href: string };
+
+type Props = {
+  primaryCta: Cta;
+  secondaryCta?: Cta;
+  // lede / intro / aside accept HTML strings so Storybook args work; in Astro
+  // templates prefer the matching named slot, which takes precedence. (Same
+  // pattern as the Heading atom.)
+  lede?: string;
+  intro?: string;
+  aside?: string;
+};
+
+const { primaryCta, secondaryCta, lede, intro, aside } = Astro.props;
+
+// aside is optional; only render the landmark when content is provided.
+const showAside = Astro.slots.has("aside") || Boolean(aside);
+---
+
+<section class="hero">
+  <div class="hero__main">
+    {
+      /* Lede is the page's h1 and comes first in DOM order; the meta paragraph
+        is lifted above it visually with `order` so screen readers still hear
+        the heading first. */
+    }
+    <Heading level={1} visualSize="6" softness={30}>
+      <slot name="lede">{lede && <Fragment set:html={lede} />}</slot>
+    </Heading>
+    <p class="hero__meta">
+      <slot name="intro">{intro && <Fragment set:html={intro} />}</slot>
+    </p>
+    <div class="hero__cta">
+      <Button
+        as="a"
+        variant="primary"
+        href={primaryCta.href}
+        children={primaryCta.label}
+      />
+      {
+        secondaryCta && (
+          <Button
+            as="a"
+            variant="ghost"
+            href={secondaryCta.href}
+            children={secondaryCta.label}
+          />
+        )
+      }
+    </div>
+  </div>
+  {
+    showAside && (
+      <aside class="hero__aside">
+        <slot name="aside">{aside && <Fragment set:html={aside} />}</slot>
+      </aside>
+    )
+  }
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(var(--space-2xl), 8vw, var(--space-3xl));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 60rem) {
+    .hero {
+      grid-template-columns: 7fr 4fr;
+      align-items: end;
+    }
+  }
+
+  .hero__main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero__meta {
+    order: -1; /* visually above the lede; lede stays first in the DOM */
+    font-size: var(--step--1);
+    color: var(--text-muted);
+    margin: 0 0 var(--space-m);
+  }
+
+  .hero__meta :global(strong) {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .hero__cta {
+    margin-top: var(--space-l);
+    display: flex;
+    gap: var(--space-s);
+    flex-wrap: wrap;
+  }
+
+  .hero__aside {
+    font-size: var(--step--1);
+    color: var(--text-muted);
+  }
+
+  /* The accent word in the lede arrives via the slot. Match the mockup's
+     italic + warmer SOFT axis; font-variation-settings must be fully
+     re-declared since it doesn't cascade per-axis. */
+  .hero :global(em) {
+    color: var(--accent);
+    font-style: italic;
+    font-variation-settings:
+      "opsz" 144,
+      "SOFT" 100;
+  }
+</style>
