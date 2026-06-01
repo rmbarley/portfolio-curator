@@ -66,6 +66,21 @@ describe("Time", () => {
     expect(document.body.querySelector("time")?.textContent?.trim()).toBe("today");
   });
 
+  test("relative format: tomorrow", async () => {
+    await renderStory(composed.Relative_Tomorrow);
+    expect(document.body.querySelector("time")?.textContent?.trim()).toBe("tomorrow");
+  });
+
+  test("relative format: in X days", async () => {
+    await renderStory(composed.Relative_InDays);
+    expect(document.body.querySelector("time")?.textContent?.trim()).toBe("in 3 days");
+  });
+
+  test("relative format: in X weeks", async () => {
+    await renderStory(composed.Relative_InWeeks);
+    expect(document.body.querySelector("time")?.textContent?.trim()).toBe("in 3 weeks");
+  });
+
   test("tabular prop adds tabular-nums class", async () => {
     await renderStory(composed.Tabular);
     expect(document.body.querySelector(".time--tabular")).toBeTruthy();

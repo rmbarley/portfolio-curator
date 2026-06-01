@@ -43,6 +43,21 @@ export const Relative_WeeksAgo = {
   args: { date: "2026-09-01", format: "relative", now: NOW },
 };
 
+export const Relative_Tomorrow = {
+  name: "Relative · tomorrow",
+  args: { date: "2026-09-23", format: "relative", now: NOW },
+};
+
+export const Relative_InDays = {
+  name: "Relative · in days",
+  args: { date: "2026-09-25", format: "relative", now: NOW },
+};
+
+export const Relative_InWeeks = {
+  name: "Relative · in weeks",
+  args: { date: "2026-10-13", format: "relative", now: NOW },
+};
+
 // ─── Tabular ──────────────────────────────────────────────────────────────────
 
 export const Tabular = {
