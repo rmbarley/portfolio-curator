@@ -1,0 +1,40 @@
+---
+import Heading from "@components/atoms/Heading/Heading.astro";
+import ContactRow from "@components/molecules/ContactRow/ContactRow.astro";
+import BaseLayout from "@layouts/BaseLayout/BaseLayout.astro";
+import { SOCIAL } from "../lib/social";
+
+const channels = Object.values(SOCIAL);
+---
+
+<BaseLayout
+  title="Contact — Ryan Barley"
+  description="Ways to reach Ryan Barley — email, Bluesky, GitHub, LinkedIn."
+  currentPath="/contact"
+>
+  <Heading level={1} visualSize="5">Contact</Heading>
+  <p class="lede">
+    If you've read something here and have a sharp disagreement, the writing
+    pushed you to try something, or you want to talk about staff-level work —
+    please email. I read everything.
+  </p>
+  <div class="contact-list">
+    {
+      channels.map((channel) => (
+        <ContactRow
+          label={channel.label}
+          value={channel.value}
+          href={"href" in channel ? channel.href : undefined}
+          note={channel.note}
+        />
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .contact-list {
+    display: grid;
+    gap: var(--space-m);
+  }
+</style>
