@@ -1,22 +1,32 @@
 ---
+import type { HTMLAttributes } from "astro/types";
 import "@styles/design-tokens.css";
 import { ExternalLink } from "@lucide/astro";
 
-interface Props {
+interface Props extends HTMLAttributes<"a"> {
   href: string;
   external?: boolean;
-  variant?: "default" | "mono" | "subtle";
-  children: string;
+  variant?: "default" | "mono" | "subtle" | "nav";
+  children?: string;
 }
 
-const { href, external = false, variant = "default", children } = Astro.props;
+const {
+  href,
+  external = false,
+  variant = "default",
+  children,
+  class: className,
+  rel: relProp,
+  target: targetProp,
+  ...attrs
+} = Astro.props;
 
-const rel = external ? "noopener noreferrer" : null;
-const target = external ? "_blank" : null;
+const rel = external ? "noopener noreferrer" : (relProp ?? null);
+const target = external ? "_blank" : (targetProp ?? null);
 ---
 
-<a href={href} rel={rel} target={target} class={`link--${variant}`}>
-  {children}
+<a href={href} rel={rel} target={target} class:list={[`link--${variant}`, className]} {...attrs}>
+  <slot>{children}</slot>
   {
     external && (
       <>
@@ -46,5 +56,32 @@ const target = external ? "_blank" : null;
 
   .link--subtle {
     color: var(--text-muted);
+  }
+
+  .link--nav {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: var(--step--1);
+    position: relative;
+
+    &:hover {
+      color: var(--text);
+    }
+
+    &[data-active="true"] {
+      color: var(--text);
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: -0.8rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 4px;
+        background: var(--accent);
+        border-radius: 50%;
+      }
+    }
   }
 </style>

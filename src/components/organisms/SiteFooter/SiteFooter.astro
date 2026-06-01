@@ -1,0 +1,46 @@
+---
+import Link from "@components/atoms/Link/Link.astro";
+import { BOTTOM_NAV } from "../../../lib/nav";
+
+const navLinks = Object.entries(BOTTOM_NAV) as [
+  keyof typeof BOTTOM_NAV,
+  string,
+][];
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner wrap">
+    <p>© {year} Ryan · Written without AI · Built with Astro</p>
+    <nav aria-label="Footer">
+      {
+        navLinks.map(([label, url], i) => (
+          <span style={{ marginRight: "8px" }}>
+            <Link href={url} variant="subtle" style={{ marginRight: "8px" }}>
+              {label}
+            </Link>
+            {i < navLinks.length - 1 && "·"}
+          </span>
+        ))
+      }
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-block: var(--space-l);
+    margin-top: var(--space-2xl);
+    font-size: var(--step--1);
+    color: var(--text-muted);
+    background: var(--bg);
+  }
+
+  .site-footer__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-l);
+    flex-wrap: wrap;
+  }
+</style>

@@ -1,0 +1,120 @@
+---
+import Link from "@components/atoms/Link/Link.astro";
+import ThemeToggle from "@components/atoms/ThemeToggle/ThemeToggle.astro";
+import { NAV } from "../../../lib/nav";
+
+type Props = {
+  currentPath: string; // for aria-current marking
+  showThemeToggle?: boolean; // default: true
+};
+
+const { currentPath, showThemeToggle = true } = Astro.props;
+
+const navLinks = Object.entries(NAV) as [keyof typeof NAV, string][];
+---
+
+<header class="site-header">
+  <div class="site-header__inner wrap">
+    <div class="brand-slot">
+      <a href="/" class="brand-link">ryan</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      {
+        navLinks.map(([label, url]) => (
+          <Link
+            href={url}
+            variant="nav"
+            data-active={`${currentPath === url}`}
+            aria-current={currentPath === url ? "page" : undefined}
+          >
+            {label}
+          </Link>
+        ))
+      }
+    </nav>
+    {
+      showThemeToggle && (
+        <div class="toggle-slot">
+          <ThemeToggle />
+        </div>
+      )
+    }
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding-block: var(--space-s);
+    position: sticky;
+    top: 0;
+    background: color-mix(in oklch, var(--bg) 85%, transparent);
+    backdrop-filter: saturate(180%) blur(8px);
+    z-index: 10;
+
+    & .site-header__inner {
+      display: flex;
+      align-items: center;
+      gap: var(--space-s);
+    }
+
+    & .nav {
+      display: flex;
+      gap: var(--space-l);
+      align-items: center;
+      margin-left: auto;
+    }
+
+    & .brand-link {
+      font-family: var(--font-display);
+      font-size: var(--step-1);
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+      font-variation-settings: "opsz" 36, "SOFT" 60;
+
+      &::after {
+        content: ".";
+        color: var(--accent);
+        margin-left: -0.05em;
+      }
+
+      &:hover {
+        color: var(--accent);
+      }
+    }
+
+    & .toggle-slot {
+      display: flex;
+    }
+
+    @media (width <= 768px) {
+      & .site-header__inner {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        row-gap: var(--space-s);
+        align-items: center;
+      }
+
+      & .brand-slot {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      & .toggle-slot {
+        grid-column: 3;
+        grid-row: 1;
+        justify-content: flex-end;
+      }
+
+      & .nav {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        margin-left: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--space-2xs) var(--space-s);
+      }
+    }
+  }
+</style>

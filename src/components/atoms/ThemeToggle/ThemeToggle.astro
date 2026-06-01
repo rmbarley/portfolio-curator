@@ -1,0 +1,50 @@
+---
+import { Sun, Moon } from "@lucide/astro";
+---
+
+<button class="theme-toggle" aria-label="Switch to light theme">
+  <Sun size={18} aria-hidden="true" class="icon--sun" />
+  <Moon size={18} aria-hidden="true" class="icon--moon" />
+</button>
+
+<script>
+  import { initThemeToggle } from "./theme-toggle";
+
+  initThemeToggle();
+</script>
+
+<style>
+  .theme-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s;
+
+    &:hover {
+      color: var(--text);
+    }
+
+    /* Dark mode (default): show Moon */
+    .icon--sun {
+      display: none;
+    }
+    .icon--moon {
+      display: block;
+    }
+
+    /* Light mode: show Sun */
+    &[data-theme="light"] {
+      .icon--sun {
+        display: block;
+      }
+      .icon--moon {
+        display: none;
+      }
+    }
+  }
+</style>

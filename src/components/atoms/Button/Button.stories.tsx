@@ -76,7 +76,8 @@ export const DisabledPrimary = {
 
     const spy = fn();
     button.addEventListener("click", spy);
-    await userEvent.click(button);
+    const user = userEvent.setup({ pointerEventsCheck: 0 });
+    await user.click(button);
     expect(spy).not.toHaveBeenCalled();
   },
 };

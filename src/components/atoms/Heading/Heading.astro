@@ -1,0 +1,71 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import "@styles/design-tokens.css";
+
+type Props = HTMLAttributes<"h1"> & {
+  level: 1 | 2 | 3 | 4;
+  visualSize?: "6" | "5" | "4" | "3" | "2" | "1";
+  balance?: boolean;
+  softness?: 30 | 60 | 100;
+  // Accepted as a prop so Storybook args work. In Astro templates,
+  // prefer passing content as a child slot — slot takes precedence.
+  children?: string;
+};
+
+const {
+  level,
+  visualSize,
+  balance,
+  softness = 60,
+  children,
+  class: className,
+  style: styleProp,
+  ...attrs
+} = Astro.props;
+
+const Tag = `h${level}` as const;
+
+const defaultSize = { 1: "6", 2: "4", 3: "2", 4: "1" } as const;
+const size = visualSize ?? defaultSize[level];
+
+// balance defaults true for h1-h2, false for h3-h4
+const shouldBalance = balance ?? level <= 2;
+
+// opsz must be declared alongside SOFT — font-variation-settings doesn't cascade per-axis
+const opszMap = { "6": 144, "5": 144, "4": 144, "3": 60, "2": 36, "1": 36 } as const;
+const opsz = opszMap[size];
+
+const variationStyle = `font-variation-settings: "opsz" ${opsz}, "SOFT" ${softness}`;
+const style = styleProp ? `${variationStyle}; ${styleProp}` : variationStyle;
+---
+
+<Tag
+  class:list={["heading", `heading--${size}`, { "heading--balance": shouldBalance }, className]}
+  {style}
+  {...attrs}
+>
+  <slot>{children}</slot>
+</Tag>
+
+<style>
+  .heading {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin: 0 0 var(--space-m);
+    text-wrap: auto;
+  }
+
+  .heading--balance {
+    text-wrap: balance;
+  }
+
+  .heading--6 { font-size: var(--step-6); }
+  .heading--5 { font-size: var(--step-5); }
+  .heading--4 { font-size: var(--step-4); }
+  .heading--3 { font-size: var(--step-3); }
+  .heading--2 { font-size: var(--step-2); }
+  .heading--1 { font-size: var(--step-1); }
+</style>
