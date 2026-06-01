@@ -7,9 +7,6 @@ type Cta = { label: string; href: string };
 type Props = {
   primaryCta: Cta;
   secondaryCta?: Cta;
-  // lede / intro / aside accept HTML strings so Storybook args work; in Astro
-  // templates prefer the matching named slot, which takes precedence. (Same
-  // pattern as the Heading atom.)
   lede?: string;
   intro?: string;
   aside?: string;
@@ -17,17 +14,11 @@ type Props = {
 
 const { primaryCta, secondaryCta, lede, intro, aside } = Astro.props;
 
-// aside is optional; only render the landmark when content is provided.
 const showAside = Astro.slots.has("aside") || Boolean(aside);
 ---
 
 <section class="hero">
   <div class="hero__main">
-    {
-      /* Lede is the page's h1 and comes first in DOM order; the meta paragraph
-        is lifted above it visually with `order` so screen readers still hear
-        the heading first. */
-    }
     <Heading level={1} visualSize="6" softness={30}>
       <slot name="lede">{lede && <Fragment set:html={lede} />}</slot>
     </Heading>
@@ -84,7 +75,7 @@ const showAside = Astro.slots.has("aside") || Boolean(aside);
   }
 
   .hero__meta {
-    order: -1; /* visually above the lede; lede stays first in the DOM */
+    order: -1;
     font-size: var(--step--1);
     color: var(--text-muted);
     margin: 0 0 var(--space-m);
@@ -107,9 +98,6 @@ const showAside = Astro.slots.has("aside") || Boolean(aside);
     color: var(--text-muted);
   }
 
-  /* The accent word in the lede arrives via the slot. Match the mockup's
-     italic + warmer SOFT axis; font-variation-settings must be fully
-     re-declared since it doesn't cascade per-axis. */
   .hero :global(em) {
     color: var(--accent);
     font-style: italic;

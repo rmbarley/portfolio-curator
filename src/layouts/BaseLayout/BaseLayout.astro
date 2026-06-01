@@ -7,8 +7,6 @@ type Props = {
   description?: string;
   currentPath?: string;
   showThemeToggle?: boolean;
-  // "reading" (default) constrains content to a comfortable measure; "wide"
-  // uses the full editorial frame for two-column / full-bleed layouts (home).
   width?: "reading" | "wide";
 };
 
@@ -44,7 +42,10 @@ const {
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <SiteHeader currentPath={currentPath} showThemeToggle={showThemeToggle} />
-    <main id="main" class:list={["wrap", { "wrap--reading": width === "reading" }]}>
+    <main
+      id="main"
+      class:list={["wrap", { "wrap--reading": width === "reading" }]}
+    >
       <slot />
     </main>
     <SiteFooter />
@@ -52,9 +53,6 @@ const {
 </html>
 
 <style>
-  /* The global `.wrap` (design-tokens.css) supplies the 76rem editorial frame,
-     centering, and horizontal padding. Reading pages narrow that to a
-     comfortable measure; wide pages keep the full frame. */
   main.wrap {
     padding-block: var(--space-2xl);
   }

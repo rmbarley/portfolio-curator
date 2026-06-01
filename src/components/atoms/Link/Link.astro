@@ -25,16 +25,20 @@ const {
 
 const rel = external ? "noopener noreferrer" : (relProp ?? null);
 const target = external ? "_blank" : (targetProp ?? null);
-const TrailingIcon = iconTrailing ? icons[iconTrailing as keyof typeof icons] : null;
+const TrailingIcon = iconTrailing
+  ? icons[iconTrailing as keyof typeof icons]
+  : null;
 ---
 
-<a href={href} rel={rel} target={target} class:list={[`link--${variant}`, className]} {...attrs}>
+<a
+  href={href}
+  rel={rel}
+  target={target}
+  class:list={[`link--${variant}`, className]}
+  {...attrs}
+>
   <slot>{children}</slot>
-  {
-    TrailingIcon && (
-      <TrailingIcon size={14} aria-hidden="true" />
-    )
-  }
+  {TrailingIcon && <TrailingIcon size={14} aria-hidden="true" />}
   {
     external && (
       <>
@@ -53,7 +57,10 @@ const TrailingIcon = iconTrailing ? icons[iconTrailing as keyof typeof icons] : 
   }
 
   .link--default {
-    color: inherit;
+    color: var(--text);
+    &:hover {
+      color: var(--accent);
+    }
   }
 
   .link--mono {

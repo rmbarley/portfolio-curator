@@ -25,7 +25,7 @@ export const BothCTAs = {
   name: "Both CTAs",
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     const links = within(canvasElement).getAllByRole("link");
-    // primary + secondary CTAs, plus the "How I work" link in the aside.
+
     expect(links.some((a) => a.textContent?.includes("Read the latest"))).toBe(true);
     expect(links.some((a) => a.textContent?.includes("The syllabus"))).toBe(true);
   },
@@ -53,7 +53,6 @@ export const WithoutAside = {
   name: "Without aside",
   args: { aside: undefined },
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-    // No aside content provided → no empty <aside> landmark in the DOM.
     expect(canvasElement.querySelector("aside")).toBeNull();
   },
 };
@@ -79,9 +78,6 @@ export const RenderTest_LedeIsH1 = {
 export const RenderTest_DOMOrder = {
   name: "RenderTest · lede precedes meta in DOM (despite visual swap)",
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-    // querySelectorAll returns matches in document order. The lede appears
-    // below the meta visually (CSS `order`), but a screen reader must
-    // encounter the h1 first — so it must come first in source order.
     const ordered = canvasElement.querySelectorAll("h1, .hero__meta");
     expect(ordered.length).toBe(2);
     expect(ordered[0].tagName.toLowerCase()).toBe("h1");
