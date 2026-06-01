@@ -1,0 +1,26 @@
+---
+type Props = {
+  spacing?: "sm" | "md" | "lg";
+  decorative?: boolean;
+};
+
+const { spacing = "lg", decorative = false } = Astro.props;
+
+const Tag = decorative ? "div" : "hr";
+---
+
+<Tag
+  class:list={["divider", `divider--${spacing}`]}
+  role={decorative ? "presentation" : undefined}
+/>
+
+<style>
+  .divider {
+    border: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .divider--sm { margin-block: var(--space-s); }
+  .divider--md { margin-block: var(--space-l); }
+  .divider--lg { margin-block: var(--space-xl); }
+</style>
