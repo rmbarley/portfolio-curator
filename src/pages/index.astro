@@ -6,7 +6,7 @@ import BaseLayout from "@layouts/BaseLayout/BaseLayout.astro";
 
 <BaseLayout width="wide">
   <HeroSection
-    primaryCta={{ label: "Read the latest →", href: "/writing" }}
+    primaryCta={{ label: "Read the latest", href: "/writing" }}
     secondaryCta={{ label: "The syllabus", href: "/now" }}
   >
     <span slot="lede">
@@ -22,7 +22,7 @@ import BaseLayout from "@layouts/BaseLayout/BaseLayout.astro";
       Twenty essays this year, written without AI. The Curator, a learning
       agent I built to help me stay on top of all this, grades each one against
       a public rubric before it gets published.
-      <Link href="/colophon">How I work →</Link>
+      <Link href="/colophon" iconTrailing="ArrowRight">How I work</Link>
     </span>
   </HeroSection>
 </BaseLayout>

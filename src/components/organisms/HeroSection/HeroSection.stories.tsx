@@ -5,13 +5,13 @@ const lede = "I write about the parts of software <em>engineers</em> still have 
 const intro =
   "<strong>Software engineer.</strong> Currently building AI-powered tools at Fountain Life. Recently finished an MS in Computer Science (AI concentration) at Georgia Tech. Writing my way from mid-level to staff in twelve months of structured study, in public.";
 const aside =
-  'Twenty essays this year, written without AI. The Curator, a learning agent I built to help me stay on top of all this, grades each one against a public rubric before it gets published. <a href="/colophon">How I work →</a>';
+  'Twenty essays this year, written without AI. The Curator, a learning agent I built to help me stay on top of all this, grades each one against a public rubric before it gets published. <a href="/colophon">How I work</a>';
 
 export default {
   title: "Organisms/HeroSection",
   component: HeroSection,
   args: {
-    primaryCta: { label: "Read the latest →", href: "/writing" },
+    primaryCta: { label: "Read the latest", href: "/writing" },
     secondaryCta: { label: "The syllabus", href: "/now" },
     lede,
     intro,
@@ -36,7 +36,7 @@ export const PrimaryOnly = {
   args: { secondaryCta: undefined },
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     expect(within(canvasElement).queryByText("The syllabus")).toBeNull();
-    expect(within(canvasElement).getByText("Read the latest →")).toBeTruthy();
+    expect(within(canvasElement).getByText("Read the latest")).toBeTruthy();
   },
 };
 
