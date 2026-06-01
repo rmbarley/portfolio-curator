@@ -1,0 +1,46 @@
+---
+type Props = {
+  tone: "highlight" | "neutral";
+  uppercase?: boolean;
+  children?: string;
+};
+
+const { tone, uppercase = false, children } = Astro.props;
+---
+
+<span
+  class:list={[
+    "badge",
+    `badge--${tone}`,
+    uppercase && "badge--uppercase",
+  ]}
+>
+  <slot>{children}</slot>
+</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 0.15rem 0.4rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid;
+  }
+
+  .badge--highlight {
+    color: var(--highlight);
+    border-color: color-mix(in oklch, var(--highlight) 50%, transparent);
+  }
+
+  .badge--neutral {
+    color: var(--text-subtle);
+    border-color: var(--border);
+  }
+
+  .badge--uppercase {
+    text-transform: uppercase;
+  }
+</style>
