@@ -10,7 +10,6 @@ type Props = {
 
 const { label, value, href, note } = Astro.props;
 
-// http(s) links open externally (rel + new tab + indicator); mailto/tel do not.
 const isExternal = href ? /^https?:/.test(href) : false;
 ---
 
@@ -40,7 +39,6 @@ const isExternal = href ? /^https?:/.test(href) : false;
     border-bottom: 1px solid var(--border);
   }
 
-  /* When rows are rendered as siblings, the last needs no divider. */
   .contact-row:last-child {
     border-bottom: 0;
   }

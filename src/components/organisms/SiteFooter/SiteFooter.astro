@@ -2,10 +2,9 @@
 import Link from "@components/atoms/Link/Link.astro";
 import { BOTTOM_NAV } from "../../../lib/nav";
 
-const navLinks = Object.entries(BOTTOM_NAV) as [
-  keyof typeof BOTTOM_NAV,
-  string,
-][];
+const navLinks = Object.values(BOTTOM_NAV) as [
+  (typeof BOTTOM_NAV)[keyof typeof BOTTOM_NAV],
+];
 const year = new Date().getFullYear();
 ---
 
@@ -14,10 +13,10 @@ const year = new Date().getFullYear();
     <p>© {year} Ryan · Written without AI · Built with Astro</p>
     <nav aria-label="Footer">
       {
-        navLinks.map(([label, url], i) => (
+        navLinks.map((url, i) => (
           <span style={{ marginRight: "8px" }}>
             <Link href={url} variant="subtle" style={{ marginRight: "8px" }}>
-              {label}
+              {url}
             </Link>
             {i < navLinks.length - 1 && "·"}
           </span>

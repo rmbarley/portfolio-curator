@@ -1,0 +1,111 @@
+---
+import Heading from "@components/atoms/Heading/Heading.astro";
+import Button from "@components/atoms/Button/Button.astro";
+
+type Cta = { label: string; href: string };
+
+type Props = {
+  primaryCta: Cta;
+  secondaryCta?: Cta;
+  // These props accept dev-authored HTML strings so Storybook args work in the
+  // test environment (which drops slots). They are NOT for user/CMS input —
+  // always prefer the matching named slot for untrusted or rich content.
+  lede?: string;
+  intro?: string;
+  aside?: string;
+};
+
+const { primaryCta, secondaryCta, lede, intro, aside } = Astro.props;
+
+const showAside = Astro.slots.has("aside") || Boolean(aside);
+---
+
+<section class="hero">
+  <div class="hero__main">
+    <Heading level={1} visualSize="6" softness={30}>
+      <slot name="lede">{lede && <Fragment set:html={lede} />}</slot>
+    </Heading>
+    <p class="hero__meta">
+      <slot name="intro">{intro && <Fragment set:html={intro} />}</slot>
+    </p>
+    <div class="hero__cta">
+      <Button
+        as="a"
+        variant="primary"
+        href={primaryCta.href}
+        iconTrailing="ArrowRight"
+        children={primaryCta.label}
+      />
+      {
+        secondaryCta && (
+          <Button
+            as="a"
+            variant="ghost"
+            href={secondaryCta.href}
+            children={secondaryCta.label}
+          />
+        )
+      }
+    </div>
+  </div>
+  {
+    showAside && (
+      <aside class="hero__aside">
+        <slot name="aside">{aside && <Fragment set:html={aside} />}</slot>
+      </aside>
+    )
+  }
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(var(--space-2xl), 8vw, var(--space-3xl));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 60rem) {
+    .hero {
+      grid-template-columns: 7fr 4fr;
+      align-items: end;
+    }
+  }
+
+  .hero__main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero__meta {
+    order: -1;
+    font-size: var(--step--1);
+    color: var(--text-muted);
+    margin: 0 0 var(--space-m);
+  }
+
+  .hero__meta :global(strong) {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .hero__cta {
+    margin-top: var(--space-l);
+    display: flex;
+    gap: var(--space-s);
+    flex-wrap: wrap;
+  }
+
+  .hero__aside {
+    font-size: var(--step--1);
+    color: var(--text-muted);
+  }
+
+  .hero :global(em) {
+    color: var(--accent);
+    font-style: italic;
+    font-variation-settings:
+      "opsz" 144,
+      "SOFT" 100;
+  }
+</style>

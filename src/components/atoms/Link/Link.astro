@@ -1,12 +1,13 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import "@styles/design-tokens.css";
-import { ExternalLink } from "@lucide/astro";
+import { ExternalLink, icons } from "@lucide/astro";
 
 interface Props extends HTMLAttributes<"a"> {
   href: string;
   external?: boolean;
   variant?: "default" | "mono" | "subtle" | "nav";
+  iconTrailing?: keyof typeof icons;
   children?: string;
 }
 
@@ -14,6 +15,7 @@ const {
   href,
   external = false,
   variant = "default",
+  iconTrailing,
   children,
   class: className,
   rel: relProp,
@@ -23,10 +25,18 @@ const {
 
 const rel = external ? "noopener noreferrer" : (relProp ?? null);
 const target = external ? "_blank" : (targetProp ?? null);
+const TrailingIcon = iconTrailing ? icons[iconTrailing] : null;
 ---
 
-<a href={href} rel={rel} target={target} class:list={[`link--${variant}`, className]} {...attrs}>
+<a
+  href={href}
+  rel={rel}
+  target={target}
+  class:list={[`link--${variant}`, className]}
+  {...attrs}
+>
   <slot>{children}</slot>
+  {TrailingIcon && <TrailingIcon size={14} aria-hidden="true" />}
   {
     external && (
       <>
@@ -45,7 +55,10 @@ const target = external ? "_blank" : (targetProp ?? null);
   }
 
   .link--default {
-    color: inherit;
+    color: var(--text);
+    &:hover {
+      color: var(--accent);
+    }
   }
 
   .link--mono {

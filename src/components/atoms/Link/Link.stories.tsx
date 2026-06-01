@@ -56,6 +56,19 @@ export const NavActive = {
   args: { variant: "nav", children: "Writing", "data-active": "true" },
 };
 
+// ─── Trailing icon ────────────────────────────────────────────────────────────
+
+export const WithTrailingIcon = {
+  name: "With trailing icon",
+  args: { variant: "default", iconTrailing: "ArrowRight", children: "How I work" },
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const link = within(canvasElement).getByRole("link");
+    const icon = link.querySelector("svg");
+    expect(icon).toBeTruthy();
+    await expect(icon).toHaveAttribute("aria-hidden", "true");
+  },
+};
+
 // ─── Interaction tests ────────────────────────────────────────────────────────
 
 export const InteractionTest_ExternalAddsRelAndIcon = {
