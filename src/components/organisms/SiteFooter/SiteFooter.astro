@@ -14,10 +14,10 @@ const year = new Date().getFullYear();
     <p>© {year} Ryan · Written without AI · Built with Astro</p>
     <nav aria-label="Footer">
       {
-        navLinks.map(([_, url], i) => (
+        navLinks.map(([label, url], i) => (
           <span style={{ marginRight: "8px" }}>
             <Link href={url} variant="subtle" style={{ marginRight: "8px" }}>
-              {url}
+              {label}
             </Link>
             {i < navLinks.length - 1 && "·"}
           </span>
