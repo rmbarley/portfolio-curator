@@ -4,8 +4,8 @@ import ThemeToggle from "@components/atoms/ThemeToggle/ThemeToggle.astro";
 import { NAV } from "../../../lib/nav";
 
 type Props = {
-  currentPath: string; // for aria-current marking
-  showThemeToggle?: boolean; // default: true
+  currentPath: string;
+  showThemeToggle?: boolean;
 };
 
 const { currentPath, showThemeToggle = true } = Astro.props;
@@ -71,7 +71,9 @@ const navLinks = Object.entries(NAV) as [keyof typeof NAV, string][];
       font-weight: 500;
       text-decoration: none;
       white-space: nowrap;
-      font-variation-settings: "opsz" 36, "SOFT" 60;
+      font-variation-settings:
+        "opsz" 36,
+        "SOFT" 60;
 
       &::after {
         content: ".";
