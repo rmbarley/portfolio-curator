@@ -1,0 +1,72 @@
+---
+import Link from "@components/atoms/Link/Link.astro";
+
+type Props = {
+  label: string;
+  value: string;
+  href?: string;
+  note?: string;
+};
+
+const { label, value, href, note } = Astro.props;
+
+// http(s) links open externally (rel + new tab + indicator); mailto/tel do not.
+const isExternal = href ? /^https?:/.test(href) : false;
+---
+
+<dl class="contact-row">
+  <dt>{label}</dt>
+  <dd>
+    {
+      href ? (
+        <Link href={href} external={isExternal}>
+          {value}
+        </Link>
+      ) : (
+        value
+      )
+    }
+    {note && <small>{note}</small>}
+  </dd>
+</dl>
+
+<style>
+  .contact-row {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: var(--space-s);
+    margin: 0;
+    padding-bottom: var(--space-m);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* When rows are rendered as siblings, the last needs no divider. */
+  .contact-row:last-child {
+    border-bottom: 0;
+  }
+
+  dt {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+    padding-top: 0.4rem;
+  }
+
+  dd {
+    margin: 0;
+    font-size: var(--step-1);
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+
+  dd small {
+    display: block;
+    margin-top: 0.2rem;
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+</style>
