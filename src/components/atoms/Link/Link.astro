@@ -1,6 +1,5 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import "@styles/design-tokens.css";
 import { ExternalLink, icons } from "@lucide/astro";
 
 interface Props extends HTMLAttributes<"a"> {
@@ -48,12 +47,6 @@ const TrailingIcon = iconTrailing ? icons[iconTrailing] : null;
 </a>
 
 <style>
-  a:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-
   .link--default {
     color: var(--text);
     &:hover {

@@ -1,0 +1,112 @@
+---
+import Badge from "@components/atoms/Badge/Badge.astro";
+import Heading from "@components/atoms/Heading/Heading.astro";
+import Link from "@components/atoms/Link/Link.astro";
+import Tag from "@components/atoms/Tag/Tag.astro";
+import Time from "@components/atoms/Time/Time.astro";
+
+type Props = {
+  date: Date | string;
+  title: string;
+  href: string;
+  description?: string;
+  type?: "deep dive" | "opinion" | "reflection";
+  wordCount?: number;
+  readingTime?: number;
+  noAI?: boolean;
+  grade?: number;
+  bordered?: boolean;
+};
+
+const {
+  date,
+  title,
+  href,
+  description,
+  type,
+  wordCount,
+  readingTime,
+  noAI = true,
+  grade,
+  bordered = true,
+} = Astro.props;
+---
+
+<article class:list={["post-row", !bordered && "post-row--borderless"]}>
+  <div class="post-row__date">
+    <Time date={date} tabular={true} />
+  </div>
+  <div class="post-row__content">
+    <Heading level={3} class="post-row__title">
+      <Link href={href}>{title}</Link>
+    </Heading>
+    {description && <p class="post-row__desc">{description}</p>}
+    <div class="post-row__meta">
+      {type && <Tag>{type}</Tag>}
+      {wordCount !== undefined && <Tag>{wordCount.toLocaleString()} words</Tag>}
+      {
+        readingTime !== undefined && (
+          <Tag>
+            <span aria-label="estimated reading time">~{readingTime} min</span>
+          </Tag>
+        )
+      }
+      {noAI && <Badge tone="highlight" uppercase={true}>No AI</Badge>}
+      {grade !== undefined && <Badge tone="neutral">graded {grade}/100</Badge>}
+    </div>
+  </div>
+</article>
+
+<style>
+  .post-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xs);
+    padding-bottom: var(--space-l);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-row--borderless {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  @media (min-width: 50rem) {
+    .post-row {
+      grid-template-columns: auto 1fr;
+      column-gap: var(--space-l);
+      align-items: baseline;
+    }
+  }
+
+  .post-row__date {
+    font-size: var(--step--1);
+    color: var(--text-subtle);
+  }
+
+  .post-row__title {
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  /* Heading atom handles font-family, step-2 size, variation-settings, weight,
+     and letter-spacing. We only override the parts that differ from its defaults. */
+  .post-row__title a {
+    text-decoration: none;
+  }
+
+  .post-row__desc {
+    font-size: var(--step--1);
+    color: var(--text-muted);
+    margin: 0.4rem 0 0;
+    max-width: var(--measure);
+  }
+
+  .post-row__meta {
+    margin-top: 0.6rem;
+    display: flex;
+    gap: var(--space-s);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+</style>

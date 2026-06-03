@@ -1,6 +1,5 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import "@styles/design-tokens.css";
 import { icons } from "@lucide/astro";
 
 type ButtonAttrs = HTMLAttributes<"button"> & { as?: "button" };
@@ -73,16 +72,9 @@ const disabledAttrs =
       background 0.15s,
       border-color 0.15s,
       color 0.15s;
-    cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-
-    &:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-      border-radius: 2px;
-    }
 
     &:is(:disabled, [aria-disabled="true"]) {
       opacity: 0.5;
