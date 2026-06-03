@@ -12,16 +12,13 @@ const year = new Date().getFullYear();
   <div class="site-footer__inner wrap">
     <p>© {year} Ryan · Written without AI · Built with Astro</p>
     <nav aria-label="Footer">
-      {
-        navLinks.map((url, i) => (
-          <span style={{ marginRight: "8px" }}>
-            <Link href={url} variant="subtle" style={{ marginRight: "8px" }}>
-              {url}
-            </Link>
-            {i < navLinks.length - 1 && "·"}
-          </span>
-        ))
-      }
+      <ul class="site-footer__nav-list">
+        {navLinks.map((url) => (
+          <li>
+            <Link href={url} variant="subtle">{url}</Link>
+          </li>
+        ))}
+      </ul>
     </nav>
   </div>
 </footer>
@@ -40,6 +37,15 @@ const year = new Date().getFullYear();
     display: flex;
     justify-content: space-between;
     gap: var(--space-l);
+    flex-wrap: wrap;
+  }
+
+  .site-footer__nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: var(--space-m);
     flex-wrap: wrap;
   }
 </style>
