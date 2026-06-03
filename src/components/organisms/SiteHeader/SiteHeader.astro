@@ -90,7 +90,7 @@ const navLinks = Object.entries(NAV) as [keyof typeof NAV, string][];
       display: flex;
     }
 
-    @media (width <= 768px) {
+    @media (max-width: 768px) {
       & .site-header__inner {
         display: grid;
         grid-template-columns: 1fr auto 1fr;

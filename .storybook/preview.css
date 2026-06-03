@@ -1,1 +1,9 @@
 @import "../src/styles/design-tokens.css";
+
+/* Give every story canvas the design-system background so contrast
+   checks run against the correct surface, not Storybook's default white. */
+#storybook-root {
+  background: var(--bg);
+  min-height: 100vh;
+  padding: var(--space-m);
+}
