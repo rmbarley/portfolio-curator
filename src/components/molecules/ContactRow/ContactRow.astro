@@ -2,9 +2,13 @@
 import Link from "@components/atoms/Link/Link.astro";
 
 type Props = {
+  /** Field label. Displayed in monospace uppercase. */
   label: string;
+  /** Contact value — plain text, or the link label when `href` is provided. */
   value: string;
+  /** Optional link target. `https://` URLs are treated as external (new tab, `rel` added); `mailto:` URLs are not. */
   href?: string;
+  /** Optional supplementary note rendered below the value in smaller muted text. */
   note?: string;
 };
 

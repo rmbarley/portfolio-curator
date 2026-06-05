@@ -5,13 +5,18 @@ import Button from "@components/atoms/Button/Button.astro";
 type Cta = { label: string; href: string };
 
 type Props = {
+  /** Required. Renders as a primary `Button as="a"` with a trailing arrow icon. */
   primaryCta: Cta;
+  /** Optional. Renders as a ghost `Button as="a"` beside the primary CTA. */
   secondaryCta?: Cta;
   // These props accept dev-authored HTML strings so Storybook args work in the
   // test environment (which drops slots). They are NOT for user/CMS input —
   // always prefer the matching named slot for untrusted or rich content.
+  /** Dev-authored HTML string for the h1 display heading. Prefer the `lede` named slot in Astro templates — slot takes precedence. `<em>` renders in accent italic. */
   lede?: string;
+  /** Dev-authored HTML string for the supporting paragraph. `<strong>` renders in full text color. Prefer the `intro` slot in Astro templates. */
   intro?: string;
+  /** Dev-authored HTML string for the optional sidebar column. When absent, the layout is single-column. Prefer the `aside` slot in Astro templates. */
   aside?: string;
 };
 

@@ -10,6 +10,7 @@ const aside =
 export default {
   title: "Organisms/HeroSection",
   component: HeroSection,
+  tags: ["autodocs"],
   args: {
     primaryCta: { label: "Read the latest", href: "/writing" },
     secondaryCta: { label: "The syllabus", href: "/now" },
@@ -17,12 +18,27 @@ export default {
     intro,
     aside,
   },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "The page hero for the portfolio homepage. Contains a display heading (`lede`), supporting text (`intro`), primary + optional secondary CTA buttons, and an optional sidebar column (`aside`). The `lede`/`intro`/`aside` props accept dev-authored HTML strings so Storybook args work; in Astro templates prefer the named slots.",
+      },
+    },
+  },
 };
 
 // ─── CTA variants ─────────────────────────────────────────────────────────────
 
 export const BothCTAs = {
   name: "Both CTAs",
+  parameters: {
+    docs: {
+      description: {
+        story: "Default layout with both primary and secondary CTAs and the aside column.",
+      },
+    },
+  },
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     const links = within(canvasElement).getAllByRole("link");
 
@@ -34,6 +50,13 @@ export const BothCTAs = {
 export const PrimaryOnly = {
   name: "Primary CTA only",
   args: { secondaryCta: undefined },
+  parameters: {
+    docs: {
+      description: {
+        story: "Omitting `secondaryCta` removes the ghost button.",
+      },
+    },
+  },
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     expect(within(canvasElement).queryByText("The syllabus")).toBeNull();
     expect(within(canvasElement).getByText("Read the latest")).toBeTruthy();
@@ -52,6 +75,13 @@ export const WithAside = {
 export const WithoutAside = {
   name: "Without aside",
   args: { aside: undefined },
+  parameters: {
+    docs: {
+      description: {
+        story: "When `aside` is absent (slot or prop), the layout collapses to a single column.",
+      },
+    },
+  },
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     expect(canvasElement.querySelector("aside")).toBeNull();
   },

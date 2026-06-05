@@ -1,7 +1,10 @@
 ---
 type Props = {
+  /** The date to display. YYYY-MM-DD strings are parsed as local calendar dates to avoid UTC-midnight offset issues; Date objects are converted to local ISO format. */
   date: Date | string;
+  /** Display format. `short` renders 'Sep 20 · 2026'. `long` renders 'September 20, 2026'. `relative` renders human strings like 'today', 'yesterday', '2 days ago', 'in 3 weeks'. Defaults to `short`. */
   format?: "short" | "long" | "relative";
+  /** Apply `font-variant-numeric: tabular-nums`. Use when dates appear in lists or tables and columns need to align. */
   tabular?: boolean;
   /** Reference date for relative formatting. Defaults to now. Only needed for tests. */
   now?: Date | string;

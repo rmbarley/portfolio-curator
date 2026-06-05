@@ -4,7 +4,16 @@ import ContactRow from "./ContactRow.astro";
 export default {
   title: "Molecules/ContactRow",
   component: ContactRow,
+  tags: ["autodocs"],
   args: { label: "Email", value: "hello@ryanbarley.com" },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "A single label/value row in a contact list. Renders as `<dl>/<dt>/<dd>` for correct definition list semantics. When `href` is provided, the value becomes a `Link` — automatically treated as external for `https://` URLs.",
+      },
+    },
+  },
 };
 
 // ─── Href / no href ───────────────────────────────────────────────────────────
@@ -15,6 +24,14 @@ export const WithHref = {
     value: "github.com/rmbarley",
     href: "https://github.com/rmbarley",
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When `href` is provided, value renders as a `Link`. External detection is automatic — `https://` URLs get `target='_blank'` and `rel='noopener noreferrer'`; `mailto:` URLs do not.",
+      },
+    },
+  },
 };
 
 export const WithoutHref = {
@@ -23,6 +40,14 @@ export const WithoutHref = {
     label: "Speaking",
     value: "Available",
     note: "2027 CFPs open. Topics: production AI evals, agent design.",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Without `href`, value renders as plain text. Use for fields that are informational rather than navigable.",
+      },
+    },
   },
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     // Plain-text value: there should be no link in the row.
@@ -37,6 +62,14 @@ export const WithNote = {
     href: "mailto:hello@ryanbarley.com",
     note: "I reply within a few days, sooner if it's substantive.",
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`note` renders below the value in smaller muted text. Use for caveats, availability context, or secondary information.",
+      },
+    },
+  },
 };
 
 export const WithoutNote = {
@@ -48,6 +81,14 @@ export const WithoutNote = {
 export const MailtoLink = {
   name: "Mailto link (not external)",
   args: { href: "mailto:hello@ryanbarley.com" },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`mailto:` links are not treated as external — no new-tab behavior or `rel` rewrite. Only `https://` URLs trigger external treatment.",
+      },
+    },
+  },
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     const link = within(canvasElement).getByRole("link");
     await expect(link).toHaveAttribute("href", "mailto:hello@ryanbarley.com");

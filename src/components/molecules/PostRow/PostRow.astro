@@ -6,15 +6,25 @@ import Tag from "@components/atoms/Tag/Tag.astro";
 import Time from "@components/atoms/Time/Time.astro";
 
 type Props = {
+  /** Publication date. Rendered by the `Time` atom in tabular short format. */
   date: Date | string;
+  /** Post title. Rendered as an `<h3>` link — the only interactive element in the row. */
   title: string;
+  /** URL for the post title link. */
   href: string;
+  /** Optional teaser text rendered below the title in muted smaller text. */
   description?: string;
+  /** Editorial category rendered as a Tag. `deep dive` = long-form analysis; `opinion` = argument; `reflection` = personal retrospective. */
   type?: "deep dive" | "opinion" | "reflection";
+  /** Optional word count rendered as a Tag. */
   wordCount?: number;
+  /** Optional estimated reading time in minutes. Rendered as a Tag with an `aria-label` for screen readers. */
   readingTime?: number;
+  /** When `true`, renders a 'No AI' highlight badge. Defaults to `true` — set explicitly to `false` to omit. */
   noAI?: boolean;
+  /** Optional Curator grade out of 100. Renders a neutral 'graded N/100' badge. */
   grade?: number;
+  /** Controls the bottom border separating rows. Set to `false` on the last item in a list. Defaults to `true`. */
   bordered?: boolean;
 };
 
