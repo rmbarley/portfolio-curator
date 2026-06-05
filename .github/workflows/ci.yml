@@ -36,6 +36,11 @@ jobs:
         run: npm ci
       - name: Run Storybook tests with coverage
         run: npm run test:coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/lcov.info
 
   e2e:
     name: Playwright e2e
