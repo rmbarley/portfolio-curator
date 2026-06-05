@@ -2,14 +2,14 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Foundations/Type Scale" />
 
-export const Step = ({ token, min, max, frauncesSample, gSample, usage }) => (
+export const Step = ({ token, min, max, frauncesSample, gSample, usage, opsz = 36 }) => (
   <div style={{padding:'var(--space-m) 0',borderBottom:'1px solid var(--border)'}}>
     <div style={{display:'flex',gap:'var(--space-m)',alignItems:'baseline',marginBottom:'var(--space-xs)'}}>
       <code style={{fontFamily:'var(--font-mono)',fontSize:'0.78rem',color:'var(--text-subtle)',minWidth:'80px',flexShrink:0}}>{token}</code>
       <span style={{fontFamily:'var(--font-mono)',fontSize:'0.72rem',color:'var(--text-muted)'}}>{min} → {max}</span>
       <span style={{fontSize:'0.78rem',color:'var(--text-subtle)'}}>{usage}</span>
     </div>
-    <div style={{fontFamily:'var(--font-display)',fontSize:`var(${token})`,fontVariationSettings:'"opsz" 144, "SOFT" 60',lineHeight:1.2,color:'var(--text)',marginBottom:'var(--space-2xs)'}}>
+    <div style={{fontFamily:'var(--font-display)',fontSize:`var(${token})`,fontVariationSettings:`"opsz" ${opsz}, "SOFT" 60`,lineHeight:1.2,color:'var(--text)',marginBottom:'var(--space-2xs)'}}>
       {frauncesSample}
     </div>
     <div style={{fontFamily:'var(--font-sans)',fontSize:`var(${token})`,lineHeight:1.4,color:'var(--text-muted)'}}>
@@ -32,6 +32,7 @@ Each step shows the same sample text in **Fraunces** (display, variable) above a
   frauncesSample="The work that got me here"
   gSample="The work that got me here"
   usage="h1, hero lede"
+  opsz={144}
 />
 
 <Step
@@ -40,6 +41,7 @@ Each step shows the same sample text in **Fraunces** (display, variable) above a
   frauncesSample="Twenty essays this year"
   gSample="Twenty essays this year"
   usage="large display (rare)"
+  opsz={144}
 />
 
 <Step
@@ -48,6 +50,7 @@ Each step shows the same sample text in **Fraunces** (display, variable) above a
   frauncesSample="Recent writing"
   gSample="Recent writing"
   usage="h2, section titles"
+  opsz={144}
 />
 
 <Step
@@ -56,6 +59,7 @@ Each step shows the same sample text in **Fraunces** (display, variable) above a
   frauncesSample="On reading carefully"
   gSample="On reading carefully"
   usage="large sub-headings"
+  opsz={60}
 />
 
 <Step
@@ -108,7 +112,7 @@ Fraunces exposes two axes beyond `wght`. Both must be declared together in `font
     <tr style={{borderBottom:'1px solid var(--border)'}}>
       <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text)'}}><code>opsz</code> (optical size)</td>
       <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text)',fontFamily:'var(--font-mono)',fontSize:'0.82rem'}}>9–144</td>
-      <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text-muted)'}}>Derived automatically from <code>visualSize</code> in the Heading atom. 144 for step-4+, 36 for step-2–3, 36 for step-1. Never set manually.</td>
+      <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text-muted)'}}>Derived automatically from <code>visualSize</code> in the Heading atom. 144 for sizes 4–6, 60 for size 3, 36 for sizes 1–2. Never set manually.</td>
     </tr>
     <tr>
       <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text)'}}><code>SOFT</code></td>
