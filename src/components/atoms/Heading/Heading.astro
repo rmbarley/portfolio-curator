@@ -2,12 +2,15 @@
 import type { HTMLAttributes } from "astro/types";
 
 type Props = HTMLAttributes<"h1"> & {
+  /** Semantic heading level. Always drives the rendered HTML element — use `visualSize` to change the visual weight, not `level`. */
   level: 1 | 2 | 3 | 4;
+  /** Override visual size independently of semantic level. Maps to fluid type-scale tokens: `'6'`→`--step-6` down to `'1'`→`--step-1`. Defaults: h1→`'6'`, h2→`'4'`, h3→`'2'`, h4→`'1'`. */
   visualSize?: "6" | "5" | "4" | "3" | "2" | "1";
+  /** Apply `text-wrap: balance` to avoid orphaned last-line words. Defaults `true` for h1/h2, `false` for h3/h4. */
   balance?: boolean;
+  /** Fraunces `SOFT` optical axis (0–100). `30` = tight/high-contrast for hero use; `60` = default; `100` = open/warm for blockquotes and editorial contexts. */
   softness?: 30 | 60 | 100;
-  // Accepted as a prop so Storybook args work. In Astro templates,
-  // prefer passing content as a child slot — slot takes precedence.
+  /** Accepted as a prop so Storybook args work. In Astro templates, prefer passing content as a child slot — slot takes precedence. */
   children?: string;
 };
 

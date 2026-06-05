@@ -6,12 +6,18 @@ type ButtonAttrs = HTMLAttributes<"button"> & { as?: "button" };
 type AnchorAttrs = HTMLAttributes<"a"> & { as: "a" };
 
 type Props = (ButtonAttrs | AnchorAttrs) & {
+  /** Visual style. `ghost` is the default; `primary` is for the single most important action per view; `chip` is a pill-shaped filter toggle with `aria-pressed`. */
   variant?: "primary" | "ghost" | "chip";
+  /** Size of the button. `md` is the default; `sm` for tight layouts like inline toolbars and chip counts. */
   size?: "sm" | "md";
+  /** For `chip` variant only — maps directly to `aria-pressed`. */
   pressed?: boolean;
   children: string;
+  /** Lucide icon name to render before the label. Use the `icon-leading` named slot for custom SVG. */
   iconLeading?: keyof typeof icons;
+  /** Lucide icon name to render after the label. Use the `icon-trailing` named slot for custom SVG. */
   iconTrailing?: keyof typeof icons;
+  /** Disables the element. On `<button>`: native `disabled`. On `<a>`: `aria-disabled="true"` + `tabindex="-1"` and `href` is stripped. */
   disabled?: boolean;
 };
 
