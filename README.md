@@ -1,43 +1,19 @@
-# Astro Starter Kit: Minimal
+# portfolio-curator
 
-```sh
-npm create astro@latest -- --template minimal
-```
+[![CI](https://github.com/rmbarley/portfolio-curator/actions/workflows/ci.yml/badge.svg)](https://github.com/rmbarley/portfolio-curator/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/rmbarley/portfolio-curator/graph/badge.svg)](https://codecov.io/gh/rmbarley/portfolio-curator)
+![Lighthouse](https://img.shields.io/badge/Lighthouse-%E2%89%A595-brightgreen?logo=lighthouse&logoColor=white)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Personal portfolio built with [Astro](https://astro.build).
 
-## 🚀 Project Structure
+## Commands
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Command                | Action                                      |
+| :--------------------- | :------------------------------------------ |
+| `npm install`          | Install dependencies                        |
+| `npm run dev`          | Start dev server at `localhost:4321`        |
+| `npm run build`        | Build for production to `./dist/`           |
+| `npm run preview`      | Preview production build locally            |
+| `npm run storybook`    | Start Storybook at `localhost:6006`         |
+| `npm run test:coverage` | Run Storybook tests with coverage           |
+| `npm run check`        | Lint and format check (Biome)               |

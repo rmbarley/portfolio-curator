@@ -18,6 +18,9 @@ const {
   showThemeToggle = true,
   width = "reading",
 } = Astro.props;
+
+const googleFontsHref =
+  "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&family=Geist:wght@300..600&family=JetBrains+Mono:wght@400;500&display=swap";
 ---
 
 <html lang="en">
@@ -27,6 +30,17 @@ const {
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href={googleFontsHref}
+      onload="this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href={googleFontsHref} />
+    </noscript>
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     <script is:inline>

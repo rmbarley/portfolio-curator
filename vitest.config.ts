@@ -18,7 +18,7 @@ export default defineConfig({
       // don't measure them. Stories are fixtures and *.test.ts is the harness.
       include: ["src/**/*.{ts,tsx}"],
       exclude: ["**/*.stories.*", "**/*.test.*", "**/*.d.ts"],
-      reporter: ["text", "html"],
+      reporter: ["text", "html", "lcov"],
       // Coverage gate is currently disabled.
       thresholds: { lines: 0, functions: 0, branches: 0, statements: 0 },
     },
