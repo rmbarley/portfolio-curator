@@ -1,0 +1,121 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from '../../components/atoms/Button/Button.stories';
+import * as LinkStories from '../../components/atoms/Link/Link.stories';
+
+<Meta title="Foundations/Iconography" />
+
+export const IconCard = ({ name, size, children, usage }) => (
+  <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'var(--space-xs)',padding:'var(--space-m)',border:'1px solid var(--border)',borderRadius:'var(--radius)',background:'var(--surface)',minWidth:'120px'}}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size} height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      style={{color:'var(--text)'}}
+    >
+      {children}
+    </svg>
+    <code style={{fontFamily:'var(--font-mono)',fontSize:'0.72rem',color:'var(--text-subtle)',textAlign:'center'}}>{name}</code>
+    <span style={{fontSize:'0.72rem',color:'var(--text-subtle)',textAlign:'center'}}>{size}px · {usage}</span>
+  </div>
+)
+
+# Iconography
+
+**Library:** [Lucide](https://lucide.dev) — open-source, tree-shakeable, stroke-based SVGs. Integrated via `@lucide/astro` which provides typed Astro components for each icon.
+
+**Sizing rules:**
+- **14px** — trailing external-link indicator on `Link`
+- **16px** — inline icons in prose or nav
+- **20px** — icons inside buttons (per the `Button` atom spec)
+- **24px** — maximum for decorative standalone use
+
+All icons are `aria-hidden="true"`. Meaning is conveyed by adjacent text — never by the icon alone.
+
+---
+
+## Working set
+
+These are the only icons currently in use or planned. Don't import icons outside this set without updating this page.
+
+<div style={{display:'flex',flexWrap:'wrap',gap:'var(--space-s)',margin:'var(--space-m) 0'}}>
+
+<IconCard name="ArrowRight" size={20} usage="button trailing, CTAs">
+  <line x1="5" y1="12" x2="19" y2="12"/>
+  <polyline points="12 5 19 12 12 19"/>
+</IconCard>
+
+<IconCard name="ExternalLink" size={14} usage="Link external indicator">
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+  <polyline points="15 3 21 3 21 9"/>
+  <line x1="10" y1="14" x2="21" y2="3"/>
+</IconCard>
+
+<IconCard name="Sun" size={20} usage="ThemeToggle (light active)">
+  <circle cx="12" cy="12" r="4"/>
+  <line x1="12" y1="2" x2="12" y2="6"/>
+  <line x1="12" y1="18" x2="12" y2="22"/>
+  <line x1="4.22" y1="4.22" x2="7.05" y2="7.05"/>
+  <line x1="16.95" y1="16.95" x2="19.78" y2="19.78"/>
+  <line x1="2" y1="12" x2="6" y2="12"/>
+  <line x1="18" y1="12" x2="22" y2="12"/>
+  <line x1="4.22" y1="19.78" x2="7.05" y2="16.95"/>
+  <line x1="16.95" y1="7.05" x2="19.78" y2="4.22"/>
+</IconCard>
+
+<IconCard name="Moon" size={20} usage="ThemeToggle (dark active)">
+  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+</IconCard>
+
+<IconCard name="Github" size={20} usage="social / contact link">
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+</IconCard>
+
+<IconCard name="Rss" size={20} usage="footer RSS link">
+  <path d="M4 11a9 9 0 0 1 9 9"/>
+  <path d="M4 4a16 16 0 0 1 16 16"/>
+  <circle cx="5" cy="19" r="1"/>
+</IconCard>
+
+<IconCard name="Check" size={20} usage="confirmation states">
+  <polyline points="20 6 9 17 4 12"/>
+</IconCard>
+
+<IconCard name="X" size={20} usage="dismiss / close states">
+  <line x1="18" y1="6" x2="6" y2="18"/>
+  <line x1="6" y1="6" x2="18" y2="18"/>
+</IconCard>
+
+</div>
+
+**Bluesky** uses a custom SVG (not a Lucide icon). See `SiteFooter` for the path. It follows the same sizing and `aria-hidden` rules.
+
+---
+
+## Icons in context
+
+Button with a leading icon (20px, in-button position):
+
+<Canvas of={ButtonStories.WithLeadingIcon} />
+
+Button with a trailing icon (20px, directional CTA):
+
+<Canvas of={ButtonStories.WithTrailingIcon} />
+
+Link with a trailing icon (14px, external indicator):
+
+<Canvas of={LinkStories.External} />
+
+---
+
+## Rules
+
+- **Never use an icon as the only label.** Always pair with visible text or an `aria-label` on the parent element.
+- **`aria-hidden="true"` on every icon SVG.** The icon is decorative; the text does the communicating.
+- **Don't scale icons outside the sizing rules.** 14/16/20/24px. The stroke weight (2px) is tuned for these sizes — scaling to 32px looks wrong.
+- **Don't import Lucide icons not in the working set** without a real design need. Every import is a bundle cost, even with tree-shaking.
