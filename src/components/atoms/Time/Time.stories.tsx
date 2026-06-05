@@ -7,18 +7,42 @@ const NOW = "2026-09-22";
 export default {
   title: "Atoms/Time",
   component: Time,
+  tags: ["autodocs"],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Semantic `<time>` element with three display formats. Always renders with a machine-readable `datetime` attribute (YYYY-MM-DD). YYYY-MM-DD strings are parsed as local calendar dates to avoid UTC-midnight timezone offset issues.",
+      },
+    },
+  },
 };
 
 // ─── Short ────────────────────────────────────────────────────────────────────
 
 export const Short = {
   args: { date: "2026-09-20", format: "short" },
+  parameters: {
+    docs: {
+      description: {
+        story: "'Sep 20 · 2026' format. The default — use in most display contexts.",
+      },
+    },
+  },
 };
 
 // ─── Long ─────────────────────────────────────────────────────────────────────
 
 export const Long = {
   args: { date: "2026-09-20", format: "long" },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "'September 20, 2026' format. Use for headings or anywhere the fully spelled-out date improves clarity.",
+      },
+    },
+  },
 };
 
 // ─── Relative ─────────────────────────────────────────────────────────────────
@@ -26,6 +50,14 @@ export const Long = {
 export const Relative_Today = {
   name: "Relative · today",
   args: { date: NOW, format: "relative", now: NOW },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Human-friendly relative strings. Under 14 days shows day count; 14+ days shows week count. Future dates use 'tomorrow' / 'in N days' / 'in N weeks'. All relative stories use a fixed `now` reference date for determinism.",
+      },
+    },
+  },
 };
 
 export const Relative_Yesterday = {
@@ -62,6 +94,14 @@ export const Relative_InWeeks = {
 
 export const Tabular = {
   args: { date: "2026-09-20", format: "short", tabular: true },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Enables `font-variant-numeric: tabular-nums` for column alignment in lists and tables.",
+      },
+    },
+  },
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     const el = canvasElement.querySelector("time");
     expect(el?.classList.contains("time--tabular")).toBe(true);

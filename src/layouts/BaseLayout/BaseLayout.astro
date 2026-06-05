@@ -4,10 +4,15 @@ import SiteFooter from "@components/organisms/SiteFooter/SiteFooter.astro";
 import SiteHeader from "@components/organisms/SiteHeader/SiteHeader.astro";
 
 type Props = {
+  /** Document `<title>` value. Defaults to 'Ryan Barley'. */
   title?: string;
+  /** Optional `<meta name="description">` content. */
   description?: string;
+  /** Passed to SiteHeader to highlight the active nav link. Defaults to '/'. */
   currentPath?: string;
+  /** Show the theme toggle in SiteHeader. Defaults to `true`. */
   showThemeToggle?: boolean;
+  /** `reading` constrains `<main>` to 44rem for prose pages. `wide` uses full container width. Defaults to `reading`. */
   width?: "reading" | "wide";
 };
 

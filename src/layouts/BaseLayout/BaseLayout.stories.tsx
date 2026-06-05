@@ -3,6 +3,15 @@ import BaseLayout from "./BaseLayout.astro";
 export default {
   title: "Layouts/BaseLayout",
   component: BaseLayout,
+  tags: ["autodocs"],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Full-page shell that wires together SiteHeader, main content area, and SiteFooter. Handles font loading (Fraunces, Geist, JetBrains Mono), theme initialization, skip-to-content link, and `<head>` meta tags. Use `width='reading'` for prose pages and `width='wide'` for index or detail pages.",
+      },
+    },
+  },
 };
 
 export const HomePage = {

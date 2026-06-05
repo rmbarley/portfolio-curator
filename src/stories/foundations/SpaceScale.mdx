@@ -1,0 +1,87 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Space Scale" />
+
+export const SpaceBar = ({ token, value, px, desc }) => (
+  <div style={{display:'flex',alignItems:'center',gap:'var(--space-m)',padding:'6px 0',borderBottom:'1px solid var(--border)'}}>
+    <code style={{fontFamily:'var(--font-mono)',fontSize:'0.78rem',color:'var(--text-subtle)',minWidth:'110px',flexShrink:0}}>{token}</code>
+    <div style={{height:'16px',background:'var(--accent)',borderRadius:'3px',opacity:0.75,width:`calc(${value} * 3)`,flexShrink:0,minWidth:'4px'}} />
+    <span style={{fontFamily:'var(--font-mono)',fontSize:'0.78rem',color:'var(--text-muted)',minWidth:'110px',flexShrink:0}}>{value} · {px}</span>
+    <span style={{fontSize:'0.82rem',color:'var(--text-subtle)'}}>{desc}</span>
+  </div>
+)
+
+# Space Scale
+
+Nine named space tokens, fixed values (not fluid). Named by role, not by size — the name tells you _where_ to use it, not just how big it is.
+
+The bars below are scaled 3× for visibility. All values are in `rem`.
+
+---
+
+<SpaceBar token="--space-3xs" value="0.25rem" px="4px" desc="Hairline gaps — between an icon and its label, between badge pills, between tightly grouped items." />
+<SpaceBar token="--space-2xs" value="0.5rem" px="8px" desc="Tight inline — icon gap inside buttons, small padding inside tags and badges." />
+<SpaceBar token="--space-xs" value="0.75rem" px="12px" desc="Close grouping — gap between meta items in PostRow, padding inside compact UI elements." />
+<SpaceBar token="--space-s" value="1rem" px="16px" desc="Body paragraph rhythm — gap between paragraphs, between list items. The base spatial unit." />
+<SpaceBar token="--space-m" value="1.5rem" px="24px" desc="Between unrelated content blocks within a section — heading to first paragraph, above a CTA." />
+<SpaceBar token="--space-l" value="2rem" px="32px" desc="Section breathing room — between a section heading and the content grid it introduces." />
+<SpaceBar token="--space-xl" value="3rem" px="48px" desc="Major section separation — between PostRows, between Now page sections, above a footer." />
+<SpaceBar token="--space-2xl" value="4.5rem" px="72px" desc="Page-level vertical padding — the block padding on <main> that keeps content off the viewport edges." />
+<SpaceBar token="--space-3xl" value="7rem" px="112px" desc="Hero-scale breathing room — the hero section's block padding at wide viewports." />
+
+---
+
+## Rules of thumb
+
+<table style={{width:'100%',borderCollapse:'collapse',fontSize:'0.88rem',marginBottom:'var(--space-l)'}}>
+  <thead>
+    <tr style={{borderBottom:'2px solid var(--border-strong)'}}>
+      <th style={{textAlign:'left',padding:'var(--space-xs) var(--space-s)',color:'var(--text-subtle)',fontFamily:'var(--font-mono)',fontSize:'0.72rem',fontWeight:'normal',letterSpacing:'0.06em',textTransform:'uppercase'}}>Situation</th>
+      <th style={{textAlign:'left',padding:'var(--space-xs) var(--space-s)',color:'var(--text-subtle)',fontFamily:'var(--font-mono)',fontSize:'0.72rem',fontWeight:'normal',letterSpacing:'0.06em',textTransform:'uppercase'}}>Token</th>
+    </tr>
+  </thead>
+  <tbody>
+    {[
+      ['Two things that belong together (icon + label, badge + badge)', '--space-3xs / --space-2xs'],
+      ['Gap between a heading and the first paragraph it introduces', '--space-s'],
+      ['Gap between two unrelated content blocks', '--space-m'],
+      ['Vertical padding on a section with a heading', '--space-l'],
+      ['Page padding-block on <main>', '--space-2xl'],
+      ['Hero section block padding', '--space-2xl to --space-3xl (clamped)'],
+    ].map(([situation, token], i, arr) => (
+      <tr key={i} style={{borderBottom: i < arr.length - 1 ? '1px solid var(--border)' : 'none'}}>
+        <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text-muted)'}}>{situation}</td>
+        <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top'}}><code style={{fontFamily:'var(--font-mono)',fontSize:'0.82rem',color:'var(--text)'}}>{token}</code></td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## Layout primitives
+
+These are not spacing tokens but are used alongside them:
+
+<table style={{width:'100%',borderCollapse:'collapse',fontSize:'0.88rem',marginBottom:'var(--space-m)'}}>
+  <thead>
+    <tr style={{borderBottom:'2px solid var(--border-strong)'}}>
+      <th style={{textAlign:'left',padding:'var(--space-xs) var(--space-s)',color:'var(--text-subtle)',fontFamily:'var(--font-mono)',fontSize:'0.72rem',fontWeight:'normal',letterSpacing:'0.06em',textTransform:'uppercase'}}>Token</th>
+      <th style={{textAlign:'left',padding:'var(--space-xs) var(--space-s)',color:'var(--text-subtle)',fontFamily:'var(--font-mono)',fontSize:'0.72rem',fontWeight:'normal',letterSpacing:'0.06em',textTransform:'uppercase'}}>Value</th>
+      <th style={{textAlign:'left',padding:'var(--space-xs) var(--space-s)',color:'var(--text-subtle)',fontFamily:'var(--font-mono)',fontSize:'0.72rem',fontWeight:'normal',letterSpacing:'0.06em',textTransform:'uppercase'}}>Use</th>
+    </tr>
+  </thead>
+  <tbody>
+    {[
+      ['--measure',    '62ch',      'Max line length for prose. Never set max-width on <p> manually — use this.'],
+      ['--max-width',  '76rem',     'Outer container (.wrap). Don\'t exceed it for any content.'],
+      ['--radius-sm',  '0.375rem',  'Button and badge border-radius.'],
+      ['--radius',     '0.625rem',  'Card and input border-radius.'],
+      ['--radius-lg',  '1rem',      'Large card or overlay border-radius.'],
+    ].map(([token, value, use], i, arr) => (
+      <tr key={i} style={{borderBottom: i < arr.length - 1 ? '1px solid var(--border)' : 'none'}}>
+        <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top'}}><code style={{fontFamily:'var(--font-mono)',fontSize:'0.82rem',color:'var(--text)'}}>{token}</code></td>
+        <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top'}}><code style={{fontFamily:'var(--font-mono)',fontSize:'0.82rem',color:'var(--text-muted)'}}>{value}</code></td>
+        <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text-muted)'}}>{use}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>

@@ -1,0 +1,130 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Type Scale" />
+
+export const Step = ({ token, min, max, frauncesSample, gSample, usage, opsz = 36 }) => (
+  <div style={{padding:'var(--space-m) 0',borderBottom:'1px solid var(--border)'}}>
+    <div style={{display:'flex',gap:'var(--space-m)',alignItems:'baseline',marginBottom:'var(--space-xs)'}}>
+      <code style={{fontFamily:'var(--font-mono)',fontSize:'0.78rem',color:'var(--text-subtle)',minWidth:'80px',flexShrink:0}}>{token}</code>
+      <span style={{fontFamily:'var(--font-mono)',fontSize:'0.72rem',color:'var(--text-muted)'}}>{min} → {max}</span>
+      <span style={{fontSize:'0.78rem',color:'var(--text-subtle)'}}>{usage}</span>
+    </div>
+    <div style={{fontFamily:'var(--font-display)',fontSize:`var(${token})`,fontVariationSettings:`"opsz" ${opsz}, "SOFT" 60`,lineHeight:1.2,color:'var(--text)',marginBottom:'var(--space-2xs)'}}>
+      {frauncesSample}
+    </div>
+    <div style={{fontFamily:'var(--font-sans)',fontSize:`var(${token})`,lineHeight:1.4,color:'var(--text-muted)'}}>
+      {gSample}
+    </div>
+  </div>
+)
+
+# Type Scale
+
+Eight fluid steps, from `--step--1` (labels) to `--step-6` (hero heading). All values are `clamp()` expressions that interpolate smoothly between a 360px and 1280px viewport — there are no breakpoint jumps.
+
+Each step shows the same sample text in **Fraunces** (display, variable) above and **Geist** (sans, variable) below.
+
+---
+
+<Step
+  token="--step-6"
+  min="3rem · 48px" max="5rem · 80px"
+  frauncesSample="The work that got me here"
+  gSample="The work that got me here"
+  usage="h1, hero lede"
+  opsz={144}
+/>
+
+<Step
+  token="--step-5"
+  min="2.25rem · 36px" max="3.5rem · 56px"
+  frauncesSample="Twenty essays this year"
+  gSample="Twenty essays this year"
+  usage="large display (rare)"
+  opsz={144}
+/>
+
+<Step
+  token="--step-4"
+  min="1.875rem · 30px" max="2.5rem · 40px"
+  frauncesSample="Recent writing"
+  gSample="Recent writing"
+  usage="h2, section titles"
+  opsz={144}
+/>
+
+<Step
+  token="--step-3"
+  min="1.5rem · 24px" max="1.875rem · 30px"
+  frauncesSample="On reading carefully"
+  gSample="On reading carefully"
+  usage="large sub-headings"
+  opsz={60}
+/>
+
+<Step
+  token="--step-2"
+  min="1.25rem · 20px" max="1.5rem · 24px"
+  frauncesSample="A note on sources"
+  gSample="A note on sources"
+  usage="h3, PostRow title"
+/>
+
+<Step
+  token="--step-1"
+  min="1.125rem · 18px" max="1.25rem · 20px"
+  frauncesSample="Bounded contexts, ten years on"
+  gSample="Bounded contexts, ten years on"
+  usage="h4, ContactRow value"
+/>
+
+<Step
+  token="--step-0"
+  min="1rem · 16px" max="1.125rem · 18px"
+  frauncesSample="Aggregate metrics are dangerous without error analysis."
+  gSample="Aggregate metrics are dangerous without error analysis."
+  usage="body text (base)"
+/>
+
+<Step
+  token="--step--1"
+  min="0.875rem · 14px" max="1rem · 16px"
+  frauncesSample="Sep 20 · 2026 · deep dive · 1,800 words"
+  gSample="Sep 20 · 2026 · deep dive · 1,800 words"
+  usage="small labels, metadata, captions, buttons"
+/>
+
+---
+
+## Fraunces variable axes
+
+Fraunces exposes two axes beyond `wght`. Both must be declared together in `font-variation-settings` — they don't cascade independently.
+
+<table style={{width:'100%',borderCollapse:'collapse',fontSize:'0.88rem',marginBottom:'var(--space-m)'}}>
+  <thead>
+    <tr style={{borderBottom:'2px solid var(--border-strong)'}}>
+      <th style={{textAlign:'left',padding:'var(--space-xs) var(--space-s)',color:'var(--text-subtle)',fontFamily:'var(--font-mono)',fontSize:'0.72rem',fontWeight:'normal',letterSpacing:'0.06em',textTransform:'uppercase'}}>Axis</th>
+      <th style={{textAlign:'left',padding:'var(--space-xs) var(--space-s)',color:'var(--text-subtle)',fontFamily:'var(--font-mono)',fontSize:'0.72rem',fontWeight:'normal',letterSpacing:'0.06em',textTransform:'uppercase'}}>Range</th>
+      <th style={{textAlign:'left',padding:'var(--space-xs) var(--space-s)',color:'var(--text-subtle)',fontFamily:'var(--font-mono)',fontSize:'0.72rem',fontWeight:'normal',letterSpacing:'0.06em',textTransform:'uppercase'}}>Rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style={{borderBottom:'1px solid var(--border)'}}>
+      <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text)'}}><code>opsz</code> (optical size)</td>
+      <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text)',fontFamily:'var(--font-mono)',fontSize:'0.82rem'}}>9–144</td>
+      <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text-muted)'}}>Derived automatically from <code>visualSize</code> in the Heading atom. 144 for sizes 4–6, 60 for size 3, 36 for sizes 1–2. Never set manually.</td>
+    </tr>
+    <tr>
+      <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text)'}}><code>SOFT</code></td>
+      <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text)',fontFamily:'var(--font-mono)',fontSize:'0.82rem'}}>0–100</td>
+      <td style={{padding:'var(--space-xs) var(--space-s)',verticalAlign:'top',color:'var(--text-muted)'}}><strong>30</strong> = tight/hero. <strong>60</strong> = default. <strong>100</strong> = warm/editorial (blockquotes, italics). Controlled via <code>softness</code> prop on the Heading atom.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Usage rules
+
+- **Display font for headings only.** Don't use Fraunces for body copy, labels, or UI chrome. Geist is the workhorse.
+- **`text-wrap: balance`** is applied to h1/h2 by the Heading atom. It prevents ragged orphaned last lines on multi-line headings.
+- **`text-wrap: pretty`** is applied to `<p>` in the base reset. Never apply it to headings — it can produce unexpected wrapping.
+- **`--step--1` is the UI floor.** Never go below it. If something needs to be smaller, reconsider the design rather than shrinking the type.

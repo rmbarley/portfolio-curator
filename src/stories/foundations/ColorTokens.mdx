@@ -1,0 +1,143 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Color Tokens" />
+
+export const Swatch = ({ name, dark, darkOklch, light, lightOklch, desc }) => (
+  <div style={{display:'flex',gap:'12px',alignItems:'flex-start',padding:'10px 0',borderBottom:'1px solid var(--border)'}}>
+    <div style={{display:'flex',gap:'4px',flexShrink:0}}>
+      <div style={{width:44,height:44,borderRadius:6,background:dark,border:'1px solid rgba(255,255,255,0.06)',flexShrink:0}} title={`Dark: ${dark}`} />
+      <div style={{width:44,height:44,borderRadius:6,background:light,border:'1px solid rgba(0,0,0,0.1)',flexShrink:0}} title={`Light: ${light}`} />
+    </div>
+    <div>
+      <code style={{fontFamily:'var(--font-mono)',fontSize:'0.82rem',color:'var(--text)'}}>{name}</code>
+      <div style={{fontFamily:'var(--font-mono)',fontSize:'0.72rem',color:'var(--text-muted)',marginTop:'2px'}}>
+        dark: <span style={{opacity:0.9}}>{dark}</span> <span style={{opacity:0.55}}>{darkOklch}</span>
+      </div>
+      <div style={{fontFamily:'var(--font-mono)',fontSize:'0.72rem',color:'var(--text-muted)'}}>
+        light: <span style={{opacity:0.9}}>{light}</span> <span style={{opacity:0.55}}>{lightOklch}</span>
+      </div>
+      <div style={{fontSize:'0.8rem',color:'var(--text-subtle)',marginTop:'4px'}}>{desc}</div>
+    </div>
+  </div>
+)
+
+# Color Tokens
+
+Every UI color in the system is a CSS custom property. There are no one-off hex values in component stylesheets — if it's a color, it's one of these tokens.
+
+The left swatch is **dark mode**, the right is **light mode**. Toggle the theme in the Storybook toolbar to see each in context.
+
+---
+
+## Backgrounds & surfaces
+
+<Swatch
+  name="--bg"
+  dark="#1f242b" darkOklch="oklch(0.16 0.015 250)"
+  light="#f9f7f2" lightOklch="oklch(0.985 0.008 80)"
+  desc="Page background. Storybook canvas background. The base layer everything else sits on."
+/>
+<Swatch
+  name="--surface"
+  dark="#292f37" darkOklch="oklch(0.2 0.02 250)"
+  light="#f3f1ec" lightOklch="oklch(0.97 0.012 80)"
+  desc="Card surfaces, chip (pressed) background, inline code background, tooltip backgrounds."
+/>
+<Swatch
+  name="--surface-2"
+  dark="#313840" darkOklch="oklch(0.24 0.02 250)"
+  light="#ecebe5" lightOklch="oklch(0.95 0.014 80)"
+  desc="Elevated surfaces above --surface. Hover states on cards, secondary panels."
+/>
+
+---
+
+## Borders
+
+<Swatch
+  name="--border"
+  dark="#3d444d" darkOklch="oklch(0.3 0.018 250)"
+  light="#d8d5cd" lightOklch="oklch(0.88 0.01 80)"
+  desc="Subtle dividers — <hr>, PostRow separators, ContactRow separators, chip (unpressed) borders."
+/>
+<Swatch
+  name="--border-strong"
+  dark="#525a64" darkOklch="oklch(0.42 0.02 250)"
+  light="#b7b3a7" lightOklch="oklch(0.76 0.012 80)"
+  desc="Button borders (ghost, chip), tag outlined borders, stronger structural dividers."
+/>
+
+---
+
+## Text
+
+<Swatch
+  name="--text"
+  dark="#f3eee5" darkOklch="oklch(0.95 0.012 80)"
+  light="#2a3140" lightOklch="oklch(0.2 0.02 250)"
+  desc="All primary body text and heading color. The default foreground."
+/>
+<Swatch
+  name="--text-muted"
+  dark="#a8a298" darkOklch="oklch(0.7 0.018 80)"
+  light="#6a6f7b" lightOklch="oklch(0.46 0.018 250)"
+  desc="Secondary text — metadata rows, PostRow description, HeroSection intro, placeholder text, subtle Link variant."
+/>
+<Swatch
+  name="--text-subtle"
+  dark="#807c75" darkOklch="oklch(0.55 0.018 80)"
+  light="#8e918e" lightOklch="oklch(0.6 0.015 250)"
+  desc="Tertiary — timestamps, ContactRow labels, de-emphasized annotations."
+/>
+
+---
+
+## Accent & highlight
+
+<Swatch
+  name="--accent"
+  dark="#b09bff" darkOklch="oklch(0.76 0.165 295)"
+  light="#5a2ec2" lightOklch="oklch(0.47 0.2 295)"
+  desc="Signature violet. Links on hover, primary CTA background, focus outline, nav active dot, blockquote bar — and nothing else. One accent, used consistently."
+/>
+<Swatch
+  name="--accent-hover"
+  dark="#c1b1ff" darkOklch="oklch(0.82 0.18 295)"
+  light="#4a1fae" lightOklch="oklch(0.41 0.21 295)"
+  desc="Primary button hover background and border. Not used independently — always paired with --accent."
+/>
+<Swatch
+  name="--highlight"
+  dark="#d6b66c" darkOklch="oklch(0.84 0.14 75)"
+  light="#835f1c" lightOklch="oklch(0.47 0.125 62)"
+  desc="Warm gold. No AI badge background/text, stale-warning copy on Now page. Distinct enough from --accent to read as a different semantic category."
+/>
+
+---
+
+## Utility
+
+<div style={{display:'flex',gap:'12px',alignItems:'flex-start',padding:'10px 0'}}>
+  <div style={{display:'flex',gap:'4px',flexShrink:0}}>
+    <div style={{width:44,height:44,borderRadius:6,background:'rgba(255,255,255,0.06)',border:'1px solid rgba(255,255,255,0.1)',flexShrink:0}} title="oklch(0.56 0.05 250) over dark bg" />
+    <div style={{width:44,height:44,borderRadius:6,background:'rgba(0,0,0,0.07)',border:'1px solid rgba(0,0,0,0.12)',flexShrink:0}} title="oklch(0.58 0.03 80) over light bg" />
+  </div>
+  <div>
+    <code style={{fontFamily:'var(--font-mono)',fontSize:'0.82rem',color:'var(--text)'}}>--link-decoration</code>
+    <div style={{fontFamily:'var(--font-mono)',fontSize:'0.72rem',color:'var(--text-muted)',marginTop:'2px'}}>
+      dark: <span style={{opacity:0.55}}>oklch(0.56 0.05 250)</span>
+    </div>
+    <div style={{fontFamily:'var(--font-mono)',fontSize:'0.72rem',color:'var(--text-muted)'}}>
+      light: <span style={{opacity:0.55}}>oklch(0.58 0.03 80)</span>
+    </div>
+    <div style={{fontSize:'0.8rem',color:'var(--text-subtle)',marginTop:'4px'}}>Faint underline on default links at rest. Transitions to --accent on hover.</div>
+  </div>
+</div>
+
+---
+
+## Rules
+
+- **One accent.** `--accent` is violet. `--highlight` is gold. They are not interchangeable — gold means NoAI or staleness, violet means interactivity.
+- **Never use hex in component stylesheets.** Reference the token. If no token fits, add one here.
+- **Contrast is the tokens' job.** The token pairs (`--bg`/`--text`, `--surface`/`--text-muted`) are tuned to pass WCAG AA in both modes. Don't override them to "soften" the UI — adjust the token values in `design-tokens.css` instead.

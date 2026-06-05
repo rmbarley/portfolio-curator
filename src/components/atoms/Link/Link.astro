@@ -4,8 +4,11 @@ import { ExternalLink, icons } from "@lucide/astro";
 
 interface Props extends HTMLAttributes<"a"> {
   href: string;
+  /** When `true`: forces `rel="noopener noreferrer"`, `target="_blank"`, renders a trailing external icon (14px, decorative), and appends a visually-hidden "(opens in new tab)" span. Overrides any passed `rel` or `target`. */
   external?: boolean;
+  /** Visual style. `default` inherits text color with accent hover — use inside body copy and post footers. `mono` is monospace/muted for technical identifiers like file paths. `subtle` is muted/normal typeface for footer and utility nav. `nav` has no underline and adds a 4px violet dot via `data-active="true"`. */
   variant?: "default" | "mono" | "subtle" | "nav";
+  /** Lucide icon name to render after the label. */
   iconTrailing?: keyof typeof icons;
   children?: string;
 }
