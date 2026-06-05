@@ -82,4 +82,4 @@ jobs:
       - name: Build
         run: npm run build
       - name: Audit with Lighthouse CI
-        run: npx @lhci/cli@0.14.x autorun
+        run: npx lhci autorun

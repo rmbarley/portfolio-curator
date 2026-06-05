@@ -18,6 +18,9 @@ const {
   showThemeToggle = true,
   width = "reading",
 } = Astro.props;
+
+const googleFontsHref =
+  "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&family=Geist:wght@300..600&family=JetBrains+Mono:wght@400;500&display=swap";
 ---
 
 <html lang="en">
@@ -32,14 +35,11 @@ const {
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&family=Geist:wght@300..600&family=JetBrains+Mono:wght@400;500&display=swap"
+      href={googleFontsHref}
       onload="this.rel='stylesheet'"
     />
     <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&family=Geist:wght@300..600&family=JetBrains+Mono:wght@400;500&display=swap"
-      />
+      <link rel="stylesheet" href={googleFontsHref} />
     </noscript>
     <title>{title}</title>
     {description && <meta name="description" content={description} />}

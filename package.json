@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.16",
+    "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.60.0",
     "@storybook-astro/framework": "^1.2.0",
     "@storybook/addon-a11y": "^10.4.1",
