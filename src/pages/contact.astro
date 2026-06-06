@@ -2,29 +2,23 @@
 import Heading from "@components/atoms/Heading/Heading.astro";
 import ContactRow from "@components/molecules/ContactRow/ContactRow.astro";
 import BaseLayout from "@layouts/BaseLayout/BaseLayout.astro";
-import { SOCIAL } from "../lib/social";
-
-const channels = Object.values(SOCIAL);
+import page from "../../content/pages/contact.json";
 ---
 
 <BaseLayout
-  title="Contact · Ryan Barley"
-  description="Ways to reach Ryan Barley: email, Bluesky, GitHub, LinkedIn."
+  title={`${page.heading} · Ryan Barley`}
+  description={page.description}
   currentPath="/contact"
 >
-  <Heading level={1} visualSize="5">Contact</Heading>
-  <p class="lede">
-    If you've read something here and have a sharp disagreement, the writing
-    pushed you to try something, or you want to talk about staff-level work,
-    please email. I read everything.
-  </p>
+  <Heading level={1} visualSize="5">{page.heading}</Heading>
+  <p class="lede">{page.lede}</p>
   <div class="contact-list">
     {
-      channels.map((channel) => (
+      page.channels.map((channel) => (
         <ContactRow
           label={channel.label}
           value={channel.value}
-          href={"href" in channel ? channel.href : undefined}
+          href={channel.href}
           note={channel.note}
         />
       ))
