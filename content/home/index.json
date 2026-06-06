@@ -1,0 +1,18 @@
+{
+  "description": "Ryan Barley is a software engineer building AI-powered tools at Fountain Life. Writing his way from mid-level to staff in twelve months of structured study, in public.",
+  "lede": "I write about the parts of software <em>engineers</em> still have to do.",
+  "intro": "<strong>Software engineer</strong>. Currently building AI-powered tools at Fountain Life. Recently finished an MS in Computer Science (AI concentration) at Georgia Tech. Writing my way from mid-level to staff in twelve months of structured study, in public.",
+  "aside": "Twenty essays this year, written without AI. The Curator, a learning agent I built to help me stay on top of all this, grades each one against a public rubric before it gets published.",
+  "asideLink": {
+    "label": "How I work",
+    "href": "/colophon"
+  },
+  "primaryCta": {
+    "label": "Read the latest",
+    "href": "/writing"
+  },
+  "secondaryCta": {
+    "label": "The syllabus",
+    "href": "/now"
+  }
+}
