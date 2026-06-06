@@ -1,7 +1,7 @@
 ---
 import Link from "@components/atoms/Link/Link.astro";
 import ThemeToggle from "@components/atoms/ThemeToggle/ThemeToggle.astro";
-import { NAV } from "../../../lib/nav";
+import site from "../../../../content/globals/site.json";
 
 type Props = {
   currentPath: string;
@@ -9,23 +9,21 @@ type Props = {
 };
 
 const { currentPath, showThemeToggle = true } = Astro.props;
-
-const navLinks = Object.entries(NAV) as [keyof typeof NAV, string][];
 ---
 
 <header class="site-header">
   <div class="site-header__inner wrap">
     <div class="brand-slot">
-      <a href="/" class="brand-link">ryan</a>
+      <a href="/" class="brand-link">{site.brandName}</a>
     </div>
     <nav class="nav" aria-label="Primary">
       {
-        navLinks.map(([label, url]) => (
+        site.nav.map(({ label, href }) => (
           <Link
-            href={url}
+            href={href}
             variant="nav"
-            data-active={`${currentPath === url}`}
-            aria-current={currentPath === url ? "page" : undefined}
+            data-active={`${currentPath === href}`}
+            aria-current={currentPath === href ? "page" : undefined}
           >
             {label}
           </Link>

@@ -1,21 +1,18 @@
 ---
 import Link from "@components/atoms/Link/Link.astro";
-import { BOTTOM_NAV } from "../../../lib/nav";
+import site from "../../../../content/globals/site.json";
 
-const navLinks = Object.values(BOTTOM_NAV) as [
-  (typeof BOTTOM_NAV)[keyof typeof BOTTOM_NAV],
-];
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="site-footer__inner wrap">
-    <p>© {year} Ryan · Written without AI · Built with Astro</p>
+    <p>© {year} {site.footerCredit} · {site.footerTagline}</p>
     <nav aria-label="Footer">
       <ul class="site-footer__nav-list">
-        {navLinks.map((url) => (
+        {site.bottomNav.map(({ label, href }) => (
           <li>
-            <Link href={url} variant="subtle">{url}</Link>
+            <Link href={href} variant="subtle">{label}</Link>
           </li>
         ))}
       </ul>
