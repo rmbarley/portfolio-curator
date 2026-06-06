@@ -5,7 +5,7 @@ storybook-server/
 coverage/
 # generated types
 .astro/
-.tina/__generated__/
+tina/__generated__/
 
 # dependencies
 node_modules/
