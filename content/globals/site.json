@@ -1,0 +1,20 @@
+{
+  "siteTitle": "Ryan Barley",
+  "brandName": "ryan",
+  "footerCredit": "Ryan",
+  "footerTagline": "Written without AI · Built with Astro",
+  "nav": [
+    { "label": "Now", "href": "/now" },
+    { "label": "Writing", "href": "/writing" },
+    { "label": "Building", "href": "/building" },
+    { "label": "Reading", "href": "/reading" },
+    { "label": "Ask", "href": "/ask" },
+    { "label": "Resume", "href": "/resume.pdf" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "bottomNav": [
+    { "label": "Now", "href": "/now" },
+    { "label": "Colophon", "href": "/colophon" },
+    { "label": "Feed", "href": "/feed.xml" }
+  ]
+}
