@@ -2,5 +2,5 @@
   "heading": "Ask",
   "description": "A RAG agent that answers questions about Ryan's work using his resume and published writing as the corpus. It cites sources and says 'I don't know' rather than confabulate.",
   "lede": "A small RAG agent that answers questions about my work using my resume and published writing as the corpus. It cites sources for every claim. It will say \"I don't know\" rather than confabulate.",
-  "body": "Coming soon"
+  "body": "Goes live once there's enough writing to ground it (around Module 3). It'll cite its sources and admit when it doesn't know."
 }
