@@ -2,6 +2,7 @@
 import "@styles/design-tokens.css";
 import SiteFooter from "@components/organisms/SiteFooter/SiteFooter.astro";
 import SiteHeader from "@components/organisms/SiteHeader/SiteHeader.astro";
+import site from "../../../content/globals/site.json";
 
 type Props = {
   /** Document `<title>` value. Defaults to 'Ryan Barley'. */
@@ -17,7 +18,7 @@ type Props = {
 };
 
 const {
-  title = "Ryan Barley",
+  title = site.siteTitle,
   description,
   currentPath = "/",
   showThemeToggle = true,

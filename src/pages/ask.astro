@@ -1,14 +1,15 @@
 ---
 import Heading from "@components/atoms/Heading/Heading.astro";
 import BaseLayout from "@layouts/BaseLayout/BaseLayout.astro";
+import page from "../../content/pages/ask.json";
 ---
 
-<BaseLayout title="Ask · Ryan Barley" description="A RAG agent that answers questions about Ryan's work using his resume and published writing as the corpus. It cites sources and says 'I don't know' rather than confabulate." currentPath="/ask">
-  <Heading level={1} visualSize="5">Ask</Heading>
-  <p class="lede">
-    A small RAG agent that answers questions about my work using my resume and
-    published writing as the corpus. It cites sources for every claim. It will
-    say "I don't know" rather than confabulate.
-  </p>
-  <p class="lede">Coming soon</p>
+<BaseLayout
+  title={`${page.heading} · Ryan Barley`}
+  description={page.description}
+  currentPath="/ask"
+>
+  <Heading level={1} visualSize="5">{page.heading}</Heading>
+  <p class="lede">{page.lede}</p>
+  {page.body && <p class="lede">{page.body}</p>}
 </BaseLayout>

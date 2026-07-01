@@ -3,8 +3,10 @@ dist/
 storybook-static/
 storybook-server/
 coverage/
+public/admin/
 # generated types
 .astro/
+tina/__generated__/
 
 # dependencies
 node_modules/

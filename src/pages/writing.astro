@@ -1,14 +1,15 @@
 ---
 import Heading from "@components/atoms/Heading/Heading.astro";
 import BaseLayout from "@layouts/BaseLayout/BaseLayout.astro";
+import page from "../../content/pages/writing.json";
 ---
 
-<BaseLayout title="Writing · Ryan Barley" description="Twenty essays over twelve months, written without AI and graded against a public 100-point rubric. Taking positions, citing sources, naming what changed." currentPath="/writing">
-  <Heading level={1} visualSize="5">Writing</Heading>
-  <p class="lede">
-    Twenty essays over twelve months, written without AI and graded against a
-    public 100-point rubric before publication. Take a position; cite the
-    source; name what changed your mind.
-  </p>
-  <p class="lede">Coming soon</p>
+<BaseLayout
+  title={`${page.heading} · Ryan Barley`}
+  description={page.description}
+  currentPath="/writing"
+>
+  <Heading level={1} visualSize="5">{page.heading}</Heading>
+  <p class="lede">{page.lede}</p>
+  {page.body && <p class="lede">{page.body}</p>}
 </BaseLayout>

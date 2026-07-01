@@ -1,13 +1,14 @@
 ---
 import Heading from "@components/atoms/Heading/Heading.astro";
 import BaseLayout from "@layouts/BaseLayout/BaseLayout.astro";
+import page from "../../content/pages/colophon.json";
 ---
 
 <BaseLayout
-  title="Colophon · Ryan Barley"
-  description="How this site is built and how Ryan works: the tools, type choices, AI policy, grading rubric, and the principles behind the design."
+  title={`${page.heading} · Ryan Barley`}
+  description={page.description}
   currentPath="/colophon"
 >
-  <Heading level={1} visualSize="5">Colophon</Heading>
-  <p class="lede">Coming soon</p>
+  <Heading level={1} visualSize="5">{page.heading}</Heading>
+  <p class="lede">{page.lede}</p>
 </BaseLayout>

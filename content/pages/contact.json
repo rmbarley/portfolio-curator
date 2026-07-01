@@ -1,0 +1,36 @@
+{
+  "heading": "Contact",
+  "description": "Ways to reach Ryan Barley: email, Bluesky, GitHub, LinkedIn.",
+  "lede": "If you've read something here and have a sharp disagreement, the writing pushed you to try something, or you want to talk about staff-level work, please email. I read everything.",
+  "channels": [
+    {
+      "label": "Email",
+      "value": "hello@ryanbarley.com",
+      "href": "mailto:hello@ryanbarley.com",
+      "note": "I reply within a few days, sooner if it's substantive."
+    },
+    {
+      "label": "Bluesky",
+      "value": "@ryanbarley.bsky.social",
+      "href": "https://bsky.app/profile/ryanbarley.bsky.social",
+      "note": "Active. Where most of the syllabus thinking happens out loud."
+    },
+    {
+      "label": "GitHub",
+      "value": "github.com/rmbarley",
+      "href": "https://github.com/rmbarley",
+      "note": "Public repos: the Curator, this site, the syllabus, MCP server."
+    },
+    {
+      "label": "LinkedIn",
+      "value": "linkedin.com/in/rmbarley",
+      "href": "https://linkedin.com/in/rmbarley",
+      "note": "I'm here but I post less. DMs open."
+    },
+    {
+      "label": "Speaking",
+      "value": "Available",
+      "note": "Open to 2027 CFPs once I have something worth a talk. Likely topics: production AI evals, agent design."
+    }
+  ]
+}

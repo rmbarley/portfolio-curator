@@ -1,17 +1,15 @@
 ---
 import Heading from "@components/atoms/Heading/Heading.astro";
 import BaseLayout from "@layouts/BaseLayout/BaseLayout.astro";
+import page from "../../content/pages/building.json";
 ---
 
 <BaseLayout
-  title="Building · Ryan Barley"
-  description="Projects Ryan has shipped and is shipping — each with a repo, write-up, and live demo or dashboard where available."
+  title={`${page.heading} · Ryan Barley`}
+  description={page.description}
   currentPath="/building"
 >
-  <Heading level={1} visualSize="5">Building</Heading>
-  <p class="lede">
-    Things I've shipped and am shipping. Each project links to its repo, a
-    write-up, and (where it exists) a live demo or dashboard.
-  </p>
-  <p class="lede">Coming soon</p>
+  <Heading level={1} visualSize="5">{page.heading}</Heading>
+  <p class="lede">{page.lede}</p>
+  {page.body && <p class="lede">{page.body}</p>}
 </BaseLayout>

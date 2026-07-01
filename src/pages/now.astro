@@ -1,9 +1,14 @@
 ---
 import Heading from "@components/atoms/Heading/Heading.astro";
 import BaseLayout from "@layouts/BaseLayout/BaseLayout.astro";
+import page from "../../content/pages/now.json";
 ---
 
-<BaseLayout title="Now · Ryan Barley" description="What Ryan is currently working on, reading, and thinking about — a living snapshot of his twelve-month staff-engineering study plan." currentPath="/now">
-  <Heading level={1} visualSize="5">Now</Heading>
-  <p class="lede">Coming soon</p>
+<BaseLayout
+  title={`${page.heading} · Ryan Barley`}
+  description={page.description}
+  currentPath="/now"
+>
+  <Heading level={1} visualSize="5">{page.heading}</Heading>
+  <p class="lede">{page.lede}</p>
 </BaseLayout>
